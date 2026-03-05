@@ -31,6 +31,11 @@ const nameInput    = document.querySelector('#name-input');
 const guestInput   = document.querySelector('#guest-input');
 const guestField   = document.querySelector('#guest-field');
 
+const btnYes       = document.querySelector('#btn-yes');
+const btnNo        = document.querySelector('#btn-no');
+const confirmation = document.querySelector('#confirmation');
+const regret       = document.querySelector('#regret');
+
 // Try getting the yes, no, confirmation and regret elements from the html.
 // const btnYes       = ;
 // const btnNo        = ;
@@ -67,8 +72,17 @@ const getGuests = () => Number(guestInput.value);
 
 btnYes.addEventListener('click', () => {
 
-  // YOUR CODE HERE
+  isGoing    = true;
+  isNotGoing = false;
+  btnYes.classList.add('active');
+  btnNo.classList.remove('active');
 
+  guestField.classList.remove('hidden');
+
+  confirmation.classList.remove('hidden');
+  regret.classList.add('hidden');
+
+  updateConfirmation();
 
 });
 
@@ -82,8 +96,17 @@ btnYes.addEventListener('click', () => {
 
 btnNo.addEventListener('click', () => {
 
-  // YOUR CODE HERE
+  isGoing    = false;
+  isNotGoing = true;
+  btnNo.classList.add('active');
+  btnYes.classList.remove('active');
 
+  guestField.classList.add('hidden');
+
+  confirmation.classList.add('hidden');
+  regret.classList.remove('hidden');
+
+  regret.textContent = `Sorry to hear that, ${getName()}. Maybe next time!`;
 
 });
 
@@ -105,12 +128,15 @@ btnNo.addEventListener('click', () => {
 const updateConfirmation = () => {
   const guests = getGuests();
 
-  // YOUR CODE HERE: build guestLine based on guests value
-
-
-  // YOUR CODE HERE: set confirmation.textContent using a template literal
-  // Example shape: `${getName()} is coming — ${guestLine}`
-
+  let guestLine;
+  if (guests === 0) {
+    guestLine = 'flying solo.';
+  } else if (guests === 1) {
+    guestLine = 'bringing 1 guest.';
+  } else {
+    guestLine = `bringing ${guests} guests.`;
+  }
+  confirmation.textContent = `${getName()} is coming — ${guestLine}`;
 };
 
 
@@ -124,15 +150,14 @@ const updateConfirmation = () => {
 
 nameInput.addEventListener('input', () => {
 
-  // YOUR CODE HERE
-
+  if (isGoing)    updateConfirmation();
+  if (isNotGoing) regret.textContent = `Sorry to hear that, ${getName()}. Maybe next time!`;
 
 });
 
 guestInput.addEventListener('input', () => {
 
-  // YOUR CODE HERE
-
+  if (isGoing) updateConfirmation();
 
 });
 
