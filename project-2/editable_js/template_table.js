@@ -4,14 +4,6 @@
  * Display data in sortable rows - good for scanning specific information
  */
 function showTable(data) {
-  // Requirements:
-  // - Show data in a table format
-  // - Include all important fields
-  // - Make it easy to scan and compare
-  // - Consider adding sorting functionality
-  //   https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/
-
-    /*
     const rows = data.map(function(restaurant) {
         const name = restaurant.name || '—';
         const city = restaurant.city || '—';
@@ -27,9 +19,7 @@ function showTable(data) {
             <td>${address}</td>
         </tr>`;
     }).join('');
-        
-    */ 
-  /*html*/ 
+
     return `
         <h2 class="view-title">📋 Table View</h2>
         <p class="view-description">${data.length} inspection records</p>
