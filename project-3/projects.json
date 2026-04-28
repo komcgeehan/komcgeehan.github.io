@@ -18,7 +18,7 @@
         "title": "Project Three",
         "category": "Annual Report",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
-        "year": "2023"
+        "year": "2024"
     },
     {
         "id": 4,
@@ -32,13 +32,55 @@
         "title": "Project Five",
         "category": "Case Statement",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
-        "year": "2022"
+        "year": "2023"
     },
     {
         "id": 6,
         "title": "Project Six",
         "category": "Direct Mail",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2023"
+    },
+    {
+        "id": 7,
+        "title": "Project Seven",
+        "category": "Newsletter",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2022"
+    },
+    {
+        "id": 8,
+        "title": "Project Eight",
+        "category": "Major Gifts",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2022"
+    },
+    {
+        "id": 9,
+        "title": "Project Nine",
+        "category": "Digital Campaign",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2022"
+    },
+    {
+        "id": 10,
+        "title": "Project Ten",
+        "category": "Email Series",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2021"
+    },
+    {
+        "id": 11,
+        "title": "Project Eleven",
+        "category": "Annual Report",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2021"
+    },
+    {
+        "id": 12,
+        "title": "Project Twelve",
+        "category": "Case Statement",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+        "year": "2021"
     }
 ]
