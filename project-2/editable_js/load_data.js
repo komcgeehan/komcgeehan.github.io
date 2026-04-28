@@ -12,7 +12,7 @@ async function loadData() {
     console.log("data loaded", data);
     
     // You'll need to look at that data in the console to make sure you have restaurants to work with
-    return data. features.map(feature => feature.properties);
+    return data.features.map(feature => feature.properties);
   } catch (error) {
     console.error("Failed to load data:", error);
     throw new Error("Could not load data from API");
