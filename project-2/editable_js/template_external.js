@@ -3,26 +3,45 @@
  * EXTERNAL LIBRARY VIEW
  * Pick an external library and pipe your data to it.
  */
-function showTable(data) {
-  // Requirements:
-  // - Show data using an external library, such as leaflet.js or chartsjs or similar.
-  // - Make a filter on this page so your external library only shows useful data.
+function showExternal(data) {
 
-    /*
-        javascript goes here! you can return it below
-    */ 
-  
-        /*html*/ 
+    // Count inspections by result type
+    const resultCounts = {};
+    data.forEach(function(r) {
+        const result = r.inspection_results || 'Unknown';
+        resultCounts[result] = (resultCounts[result] || 0) + 1;
+    });
+
+    const labels = Object.keys(resultCounts);
+    const counts = Object.values(resultCounts);
+
   return `
-                <h2 class="view-title">Library View</h2>
-                <div class="todo-implementation">
-                    <h3>TODO: Implement Library View</h3>
-                    <p><strong>Data available:</strong> ${data.length} items loaded</p>
-                    <p><strong>Your task:</strong> Display the data using an external library</p>
-                    <p><strong>Consider:</strong> What types of data do you have? Lat-long? Percentages from the stats page? Etc.</p>
-                    <p><strong>Good for:</strong> User interpretability</p>
-                </div>
-            `;
+        <h2 class="view-title">📊 External Library View</h2>
+        <p class="view-description">Inspection results distribution using Chart.js</p>
+        <canvas id="results-chart" height="120"></canvas>
+        <script>
+            const ctx = document.getElementById('results-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ${JSON.stringify(labels)},
+                    datasets: [{
+                        label: 'Number of Inspections',
+                        data: ${JSON.stringify(counts)},
+                        backgroundColor: 'rgba(0, 124, 186, 0.7)',
+                        borderColor: 'rgba(0, 124, 186, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        <\/script>
+    `;
 }
 
-export default showTable;
+export default showExternal;
