@@ -1,20 +1,35 @@
 /* BASE STYLES - Students can modify and extend */
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Cabin+Sketch:wght@400;700&display=swap');
+
 :root {
-    --primary-color: #007cba;
-    --secondary-color: #28a745;
-    --background-color: #f8f9fa;
+    --primary-color: #1a2e5a;
+    --secondary-color: #e8a0b0;
+    --background-color: #fdf0f3;
     --card-background: #ffffff;
-    --text-color: #333;
-    --border-color: #ddd;
-    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --text-color: #1a2e5a;
+    --border-color: #f0c0cc;
+    --shadow: 0 2px 8px rgba(26, 46, 90, 0.1);
 }
 
 body {
-    font-family: system-ui, sans-serif;
+    font-family: 'Cabin', sans-serif;
     margin: 0;
     padding: 1rem;
     background: var(--background-color);
     color: var(--text-color);
+}
+
+header h1 {
+    font-family: 'Cabin Sketch', cursive;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #555;
+    max-width: 700px;
 }
 
 .container {
@@ -34,31 +49,36 @@ body {
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 2rem;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s;
+    font-family: 'Cabin', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
 .view-button:hover {
-    background: #005a87;
+    background: #2a4a8a;
+    transform: translateY(-1px);
 }
 
 .view-button.active {
     background: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .display-container {
     background: var(--card-background);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
     min-height: 400px;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .loading {
     text-align: center;
-    color: #666;
+    color: #888;
     font-style: italic;
     padding: 2rem;
 }
@@ -68,16 +88,18 @@ body {
     border: 1px solid #fcc;
     color: #c00;
     padding: 1.5rem;
-    border-radius: 4px;
+    border-radius: 8px;
     text-align: center;
 }
 
-/* UTILITY CLASSES FOR STUDENTS */
 .view-title {
-    margin: 0 0 1rem 0;
-    color: var(--text-color);
-    border-bottom: 2px solid #eee;
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color);
     padding-bottom: 0.5rem;
+    display: inline-block;
 }
 
 .view-description {
@@ -121,12 +143,13 @@ body {
 }
 
 .restaurant-table th {
-    background: #f8f9fa;
-    font-weight: 600;
+    background: #fdf0f3;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-.restaurant-table tr:hover {
-    background: #f8f9fa;
+.restaurant-table tr:hover td {
+    background: #fdf0f3;
 }
 
 /* CATEGORY GROUPS */
@@ -140,6 +163,8 @@ body {
     padding: 1rem;
     margin: 0;
     border-radius: 8px 8px 0 0;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
 }
 
 .category-items {
@@ -149,8 +174,8 @@ body {
 }
 
 .category-item {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f5d5dc;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -170,20 +195,27 @@ body {
 .stat-card {
     text-align: center;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    background: var(--primary-color);
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
 }
 
 .stat-number {
     font-size: 3rem;
-    font-weight: bold;
+    font-weight: 700;
     margin: 0.5rem 0;
+    color: var(--secondary-color);
 }
 
 .stat-label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.9;
+    font-weight: 600;
 }
 
 .todo-implementation {
@@ -197,7 +229,14 @@ body {
 
 .asst-box {
     margin-top: 2rem;
-    padding: 1rem;
+    padding: 1.5rem;
     background: white;
-    border-radius: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+    header h1 { font-size: 1.8rem; }
+    .display-container { padding: 1rem; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
