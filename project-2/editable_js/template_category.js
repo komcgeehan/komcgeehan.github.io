@@ -3,27 +3,41 @@
  * Group data by categories - good for understanding relationships and patterns
  */
 function showCategories(data) {
-  // Requirements:
-  // - Group data by a meaningful category (cuisine, neighborhood, price, etc.)
-  // - Show items within each group
-  // - Make relationships between groups clear
-  // - Consider showing group statistics
+    const groups = {};
+    data.forEach(function(restaurant) {
+        const city = restaurant.city || 'Unknown';
+        if (!groups[city]) {
+            groups[city] = [];
+        }
+        groups[city].push(restaurant);
+    });
 
-  /* JavaScript Goes Here */ 
+    // Build HTML for each group
+    const groupsHTML = Object.entries(groups)
+        .sort((a, b) => b[1].length - a[1].length)
+        .map(function([city, restaurants]) {
+            const items = restaurants.map(r => `
+                <div class="category-item">
+                    <span>${r.name || '—'}</span>
+                    <span>${r.inspection_results || '—'}</span>
+                </div>
+            `).join('');
 
-  /* html */
-  return `
-                <h2 class="view-title">📂 Category View</h2>
-                <div class="todo-implementation">
-                    <h3>TODO: Implement Category View</h3>
-                    <p><strong>Your task:</strong> Group the data by categories to show relationships</p>
-                    <p><strong>Good for:</strong> Understanding patterns, finding similar items, exploring by type</p>
-                    <p><strong>Consider:</strong> Group by cuisine? Neighborhood? Price range? What tells the best story?</p>
-                    <p><strong>Available categories:</strong> ${[
-                      ...new Set(data.map((item) => item.cuisine)),
-                    ].join(", ")}</p>
+            return `
+                <div class="category-section">
+                    <h3 class="category-header">${city} (${restaurants.length})</h3>
+                    <div class="category-items">
+                        ${items}
+                    </div>
                 </div>
             `;
+        }).join('');
+        
+  return `
+        <h2 class="view-title">📂 Category View — By City</h2>
+        <p class="view-description">Restaurants grouped by city, sorted by number of inspections</p>
+        ${groupsHTML}
+    `;
 }
 
 
