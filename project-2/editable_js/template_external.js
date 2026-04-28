@@ -5,42 +5,35 @@
  */
 function showExternal(data) {
 
-    // Count inspections by result type
     const resultCounts = {};
     data.forEach(function(r) {
         const result = r.inspection_results || 'Unknown';
         resultCounts[result] = (resultCounts[result] || 0) + 1;
     });
 
-    const labels = Object.keys(resultCounts);
-    const counts = Object.values(resultCounts);
+    const labels = JSON.stringify(Object.keys(resultCounts));
+    const counts = JSON.stringify(Object.values(resultCounts));
 
   return `
         <h2 class="view-title">📊 External Library View</h2>
         <p class="view-description">Inspection results distribution using Chart.js</p>
         <canvas id="results-chart" height="120"></canvas>
-        <script>
+        <img src onerror="
             const ctx = document.getElementById('results-chart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ${JSON.stringify(labels)},
+                    labels: ${labels},
                     datasets: [{
                         label: 'Number of Inspections',
-                        data: ${JSON.stringify(counts)},
+                        data: ${counts},
                         backgroundColor: 'rgba(0, 124, 186, 0.7)',
-                        borderColor: 'rgba(0, 124, 186, 1)',
                         borderWidth: 1
                     }]
                 },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
+                options: { responsive: true, scales: { y: { beginAtZero: true } } }
             });
-        <\/script>
+        ">
     `;
 }
 
