@@ -1,9 +1,6 @@
-// Register ScrollTrigger plugin with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-// ============================================
-// HERO ANIMATIONS - these work fine!
-// ============================================
+
 gsap.to('.hero-title', {
     opacity: 1,
     y: 0,
@@ -25,12 +22,7 @@ gsap.to('.hero-btn', {
     ease: 'power3.out'
 });
 
-// ============================================
-// SCROLL ANIMATIONS - this is the struggle!
-// The project cards are supposed to animate
-// in one by one when you scroll to them,
-// but ScrollTrigger isn't firing correctly.
-// ============================================
+
 gsap.from('.project-card', {
     scrollTrigger: {
         trigger: '.project-grid',
