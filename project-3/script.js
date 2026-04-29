@@ -25,13 +25,7 @@ if (document.querySelector('.hero-title')) {
         delay: 0.5,
         ease: 'power3.out'
     });
-    gsap.from('.hero-btn', {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 0.8,
-        ease: 'power3.out'
-    });
+  
     setTimeout(function() {
     new Typed('#typed-text', {
         strings: ['Words and ideas can change the world.'],
