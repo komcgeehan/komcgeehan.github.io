@@ -125,6 +125,7 @@ body {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     transition: all 0.3s;
+    opacity: 0;
 }
 
 .hero-btn:hover {

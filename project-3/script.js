@@ -32,7 +32,15 @@ if (document.querySelector('.hero-title')) {
         typeSpeed: 60,
         backSpeed: 30,
         backDelay: 2000,
-        loop: false
+        loop: false,
+        onComplete: function() {
+            gsap.to('.hero-btn', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        }
     });
 }, 1200);
 }
