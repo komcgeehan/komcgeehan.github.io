@@ -34,11 +34,11 @@ if (document.querySelector('.hero-title')) {
     });
     setTimeout(function() {
     new Typed('#typed-text', {
-        strings: ['Fundraising Copywriter.', 'Storyteller.', 'Strategic Writer.'],
+        strings: ['Words and ideas can change the world.'],
         typeSpeed: 60,
         backSpeed: 30,
         backDelay: 2000,
-        loop: true
+        loop: false
     });
 }, 1200);
 }
