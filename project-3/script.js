@@ -32,6 +32,15 @@ if (document.querySelector('.hero-title')) {
         delay: 0.8,
         ease: 'power3.out'
     });
+    setTimeout(function() {
+    new Typed('#typed-text', {
+        strings: ['Fundraising Copywriter.', 'Storyteller.', 'Strategic Writer.'],
+        typeSpeed: 60,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true
+    });
+}, 1200);
 }
 
 // ============================================
