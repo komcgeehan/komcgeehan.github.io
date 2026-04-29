@@ -51,15 +51,17 @@ async function loadProjects() {
         // Build project cards
         grid.innerHTML = projects.map(function(project) {
             return `
-                <article class="project-card" aria-label="${project.title}">
-                    <div class="project-card-inner">
-                        <span class="project-category">${project.category}</span>
-                        <h2 class="project-title">${project.title}</h2>
-                        <p class="project-description">${project.description}</p>
-                        <span class="project-year">${project.year}</span>
-                    </div>
-                </article>
-            `;
+                <a href="${project.link}" class="project-card-link">
+                    <article class="project-card" aria-label="${project.title}">
+                        <div class="project-card-inner">
+                            <span class="project-category">${project.category}</span>
+                            <h2 class="project-title">${project.title}</h2>
+                            <p class="project-description">${project.description}</p>
+                            <span class="project-year">${project.year}</span>
+                        </div>
+                    </article>
+                </a>
+    `;
         }).join('');
 
         // Animate cards in with ScrollTrigger
