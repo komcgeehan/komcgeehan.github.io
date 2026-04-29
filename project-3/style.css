@@ -107,7 +107,7 @@ body {
 
 .hero-typed {
     font-size: 1.1rem;
-    color: var(--pink);
+    color: var(--muted);
     font-weight: 300;
     margin-bottom: 2.5rem;
     height: 1.6rem;
