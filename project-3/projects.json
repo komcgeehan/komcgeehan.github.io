@@ -5,7 +5,7 @@
         "category": "Direct Mail",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2024",
-        "link": "project-one.html"
+        "link": "projects/project-1.html"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "category": "Digital Campaign",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2024",
-        "link": "project-two.html"
+        "link": "projects/project-2.html"
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "category": "Annual Report",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2024",
-        "link": "project-three.html"
+        "link": "projects/project-3.html"
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@
         "category": "Email Series",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2023",
-        "link": "project-four.html"
+        "link": "projects/project-4.html"
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@
         "category": "Case Statement",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2023",
-        "link": "project-five.html"
+        "link": "projects/project-5.html"
     },
     {
         "id": 6,
@@ -45,7 +45,7 @@
         "category": "Direct Mail",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2023",
-        "link": "project-six.html"
+        "link": "projects/project-6.html"
     },
     {
         "id": 7,
@@ -53,7 +53,7 @@
         "category": "Newsletter",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2022",
-        "link": "project-seven.html"
+        "link": "projects/project-7.html"
     },
     {
         "id": 8,
@@ -61,7 +61,7 @@
         "category": "Major Gifts",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2022",
-        "link": "project-eight.html"
+        "link": "projects/project-8.html"
     },
     {
         "id": 9,
@@ -69,7 +69,7 @@
         "category": "Digital Campaign",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2022",
-        "link": "project-nine.html"
+        "link": "projects/project-9.html"
     },
     {
         "id": 10,
@@ -77,7 +77,7 @@
         "category": "Email Series",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2021",
-        "link": "project-ten.html"
+        "link": "projects/project-10.html"
     },
     {
         "id": 11,
@@ -85,7 +85,7 @@
         "category": "Annual Report",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2021",
-        "link": "project-eleven.html"
+        "link": "projects/project-11.html"
     },
     {
         "id": 12,
@@ -93,6 +93,6 @@
         "category": "Case Statement",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
         "year": "2021",
-        "link": "project-twelve.html"
+        "link": "projects/project-12.html"
     }
 ]
