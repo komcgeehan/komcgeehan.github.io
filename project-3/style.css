@@ -8,9 +8,9 @@
 
 :root {
     --pink: #d4748c;
-    --navy: #1a1a2e;
+    --navy: #000000;
     --bg: #fafaf8;
-    --text: #1a1a2e;
+    --text: #000000;
     --muted: #888;
     --border: #e8e8e4;
 }
