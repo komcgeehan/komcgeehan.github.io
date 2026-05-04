@@ -106,11 +106,11 @@ body {
 }
 
 .hero-typed {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     color: var(--muted);
     font-weight: 300;
     margin-bottom: 2.5rem;
-    height: 1.6rem;
+    height: 2rem;
 }
 
 .hero-btn {
