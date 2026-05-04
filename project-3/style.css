@@ -233,19 +233,6 @@ body {
     align-items: center;
 }
 
-.about-image-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: #e8e8e4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: var(--muted);
-    border-radius: 4px;
-}
-
 .about-content .page-title {
     margin-bottom: 1.5rem;
 }
