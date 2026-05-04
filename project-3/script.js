@@ -88,6 +88,15 @@ async function loadProjects() {
             `;
         }).join('');
 
+        gsap.from('.client-section', {
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            stagger: 0.3,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+        
     } catch (error) {
         grid.innerHTML = '<p>Could not load projects.</p>';
         console.error('Failed to load projects:', error);
