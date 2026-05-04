@@ -3,31 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project One — Kate McGeehan</title>
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Make-A-Wish Celebrity Appeal — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.ico">
     <link rel="stylesheet" href="../style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* ---- INBOX PREVIEW ---- */
+        .inbox-wrap {
+            margin-bottom: 3rem;
+        }
+
+        .inbox-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .inbox-chrome {
+            background: #f5f5f3;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .inbox-chrome-bar {
+            background: #e8e8e4;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .inbox-row {
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+        }
+
+        .inbox-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #003087;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .inbox-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .inbox-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .inbox-sender {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .inbox-date {
+            font-size: 0.75rem;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .inbox-subject {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .inbox-preheader {
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ---- ANNOTATED EMAIL ---- */
+        .email-section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .annotated-wrap {
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .email-img-col {
+            flex: 0 0 380px;
+            position: relative;
+        }
+
+        .email-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        /* Annotation dots on the image */
+        .ann-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            z-index: 2;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        /* SVG connector lines */
+        .ann-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 1;
+        }
+
+        /* Annotation cards column */
+        .ann-cards-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-top: 0.5rem;
+        }
+
+        .ann-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+            position: relative;
+        }
+
+        .ann-card-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .ann-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-card-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ---- CASE STUDY ---- */
+        .case-study {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-field-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+        }
+
+        .case-field-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .annotated-wrap {
+                flex-direction: column;
+            }
+            .email-img-col {
+                flex: none;
+                width: 100%;
+            }
+            .ann-svg { display: none; }
+            .ann-dot { display: none; }
+            .case-study {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+    <script src="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap">
 </head>
 <body>
+
     <nav class="navbar" aria-label="Main navigation">
         <a href="../index.html" class="logo">KM</a>
         <ul class="nav-links">
-            <li><a href="../work.html">Portfolio</a></li>
+            <li><a href="../work.html" class="active">Portfolio</a></li>
             <li><a href="../about.html">About</a></li>
         </ul>
     </nav>
-    <main class="project-main">
-        <div class="project-page-header">
-            <a href="../work.html" class="back-link" aria-label="Back to work">← Back</a>
-            <span class="project-page-category">Direct Mail</span>
-            <h1 class="project-page-title">Project One</h1>
-            <p class="project-page-meta">XXCHANGE ME DATEXX</p>
+
+    <main class="project-main" style="max-width: 960px;">
+
+        <a href="../work.html" class="back-link">← Back to portfolio</a>
+
+        <span class="project-page-category">Make-A-Wish · Email Copywriting</span>
+        <h1 class="project-page-title">Celebrity Appeal:<br>Skylar Astin</h1>
+        <p class="project-page-meta">World Wish Month · 4X Match Campaign · April 2026</p>
+
+        <!-- INBOX PREVIEW -->
+        <div class="inbox-wrap">
+            <p class="inbox-label">How it lands in the inbox</p>
+            <div class="inbox-chrome">
+                <div class="inbox-chrome-bar">
+                    <div class="dot" style="background:#ed6a5a;"></div>
+                    <div class="dot" style="background:#f5ac45;"></div>
+                    <div class="dot" style="background:#71c442;"></div>
+                </div>
+                <div class="inbox-row">
+                    <div class="inbox-avatar">MAW</div>
+                    <div class="inbox-body">
+                        <div class="inbox-top">
+                            <span class="inbox-sender">Skylar Astin via Make-A-Wish</span>
+                            <span class="inbox-date">Apr 2026</span>
+                        </div>
+                        <div class="inbox-subject">4X match: Help a wish kid's heart sing, FirstName</div>
+                        <div class="inbox-preheader">Donate now and help 4X as many waiting wish kids find the hope and strength to keep fighting.</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="project-page-image-placeholder" aria-label="Project image">Image placeholder</div>
-        <div class="project-page-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+        <!-- ANNOTATED EMAIL -->
+        <p class="email-section-label">The email</p>
+        <div class="annotated-wrap" id="ann-wrap">
+
+            <div class="email-img-col" id="img-col">
+                <img src="../images/project-1.jpg" alt="Skylar Astin Make-A-Wish email screenshot" class="email-img" id="email-img">
+
+                <!-- Annotation dots — positioned as % of image height -->
+                <!-- Dot 1: Subject line area — top of email, inbox preview region (pointing to header) -->
+                <div class="ann-dot" id="dot-1" style="top: 3.5%; left: 50%; transform: translateX(-50%);">1</div>
+                <!-- Dot 2: "Wish kids are waiting in the wings" — approx 52% down -->
+                <div class="ann-dot" id="dot-2" style="top: 51%; left: 15%;">2</div>
+                <!-- Dot 3: Bold urgency paragraph — approx 67% down -->
+                <div class="ann-dot" id="dot-3" style="top: 66%; left: 15%;">3</div>
+
+                <svg class="ann-svg" id="ann-svg" viewBox="0 0 380 800" preserveAspectRatio="none"></svg>
+            </div>
+
+            <div class="ann-cards-col" id="ann-cards">
+                <div class="ann-card" id="card-1">
+                    <div class="ann-card-num">1</div>
+                    <div class="ann-card-title">Subject line as emotional entry point</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco.</div>
+                </div>
+                <div class="ann-card" id="card-2">
+                    <div class="ann-card-num">2</div>
+                    <div class="ann-card-title">Theatrical language mirrors the celebrity voice</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div>
+                </div>
+                <div class="ann-card" id="card-3">
+                    <div class="ann-card-num">3</div>
+                    <div class="ann-card-title">Urgency built from facts, not pressure</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+                </div>
+            </div>
+
         </div>
+
+        <!-- CASE STUDY -->
+        <div class="case-study">
+            <div>
+                <p class="case-field-label">Brief</p>
+                <p class="case-field-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Approach</p>
+                <p class="case-field-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Result</p>
+                <p class="case-field-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+            </div>
+        </div>
+
     </main>
-    <script src="../script.js"></script>
+
+    <script>
+        gsap.from('.project-page-category', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.project-page-title', { opacity: 0, y: 30, duration: 1, delay: 0.15, ease: 'power3.out' });
+        gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
+        gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+
+        // Draw SVG connector lines from each dot to its card
+        function drawConnectors() {
+            const imgCol = document.getElementById('img-col');
+            const annCards = document.getElementById('ann-cards');
+            const svg = document.getElementById('ann-svg');
+            const imgEl = document.getElementById('email-img');
+
+            const imgRect = imgEl.getBoundingClientRect();
+            const colRect = imgCol.getBoundingClientRect();
+
+            svg.innerHTML = '';
+
+            const pairs = [
+                { dotId: 'dot-1', cardId: 'card-1' },
+                { dotId: 'dot-2', cardId: 'card-2' },
+                { dotId: 'dot-3', cardId: 'card-3' },
+            ];
+
+            pairs.forEach(function(pair) {
+                const dot = document.getElementById(pair.dotId);
+                const card = document.getElementById(pair.cardId);
+                if (!dot || !card) return;
+
+                const dotRect = dot.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+
+                // Convert to positions relative to imgCol
+                const x1 = dotRect.left + dotRect.width / 2 - colRect.left;
+                const y1 = dotRect.top + dotRect.height / 2 - colRect.top;
+                // End point: left edge of card, vertically centered
+                const x2 = cardRect.left - colRect.left;
+                const y2 = cardRect.top + cardRect.height / 2 - colRect.top;
+
+                // Scale to SVG viewBox (380 x proportional)
+                const scaleX = 380 / colRect.width;
+                const scaleY = (imgRect.height / colRect.height) * (colRect.height / colRect.height);
+
+                const sx1 = x1 * scaleX;
+                const sy1 = y1 * scaleX;
+                const sx2 = x2 * scaleX;
+                const sy2 = y2 * scaleX;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const cx = (sx1 + sx2) / 2;
+                path.setAttribute('d', `M ${sx1} ${sy1} C ${cx} ${sy1}, ${cx} ${sy2}, ${sx2} ${sy2}`);
+                path.setAttribute('stroke', '#d4748c');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '4 3');
+                path.setAttribute('opacity', '0.6');
+                svg.appendChild(path);
+            });
+        }
+
+        // Wait for image to load then draw
+        const img = document.getElementById('email-img');
+        if (img.complete) {
+            drawConnectors();
+        } else {
+            img.addEventListener('load', drawConnectors);
+        }
+        window.addEventListener('resize', drawConnectors);
+    </script>
+
 </body>
 </html>
