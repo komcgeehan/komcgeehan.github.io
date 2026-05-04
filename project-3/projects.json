@@ -1,14 +1,11 @@
 [
-    { "id": 1, "title": "Project One", "link": "projects/project-1.html", "image": "images/project-1.jpg" },
-    { "id": 2, "title": "Project Two", "link": "projects/project-2.html", "image": "images/project-2.jpg" },
-    { "id": 3, "title": "Project Three", "link": "projects/project-3.html", "image": "images/project-3.jpg" },
-    { "id": 4, "title": "Project Four", "link": "projects/project-4.html", "image": "images/project-4.jpg" },
-    { "id": 5, "title": "Project Five", "link": "projects/project-5.html", "image": "images/project-5.jpg" },
-    { "id": 6, "title": "Project Six", "link": "projects/project-6.html", "image": "images/project-6.jpg" },
-    { "id": 7, "title": "Project Seven", "link": "projects/project-7.html", "image": "images/project-7.jpg" },
-    { "id": 8, "title": "Project Eight", "link": "projects/project-8.html", "image": "images/project-8.jpg" },
-    { "id": 9, "title": "Project Nine", "link": "projects/project-9.html", "image": "images/project-9.jpg" },
-    { "id": 10, "title": "Project Ten", "link": "projects/project-10.html", "image": "images/project-10.jpg" },
-    { "id": 11, "title": "Project Eleven", "link": "projects/project-11.html", "image": "images/project-11.jpg" },
-    { "id": 12, "title": "Project Twelve", "link": "projects/project-12.html", "image": "images/project-12.jpg" }
+    { "id": 1, "title": "XXCHANGE MEXX", "client": "Make-A-Wish", "link": "projects/project-1.html", "image": "images/project-1.jpg" },
+    { "id": 2, "title": "XXCHANGE MEXX", "client": "Make-A-Wish", "link": "projects/project-2.html", "image": "images/project-2.jpg" },
+    { "id": 3, "title": "XXCHANGE MEXX", "client": "Make-A-Wish", "link": "projects/project-3.html", "image": "images/project-3.jpg" },
+    { "id": 4, "title": "XXCHANGE MEXX", "client": "Plan International USA", "link": "projects/project-4.html", "image": "images/project-4.jpg" },
+    { "id": 5, "title": "XXCHANGE MEXX", "client": "Plan International USA", "link": "projects/project-5.html", "image": "images/project-5.jpg" },
+    { "id": 6, "title": "XXCHANGE MEXX", "client": "Plan International USA", "link": "projects/project-6.html", "image": "images/project-6.jpg" },
+    { "id": 7, "title": "XXCHANGE MEXX", "client": "University Fundraising", "link": "projects/project-7.html", "image": "images/project-7.jpg" },
+    { "id": 8, "title": "XXCHANGE MEXX", "client": "University Fundraising", "link": "projects/project-8.html", "image": "images/project-8.jpg" },
+    { "id": 9, "title": "XXCHANGE MEXX", "client": "University Fundraising", "link": "projects/project-9.html", "image": "images/project-9.jpg" }
 ]

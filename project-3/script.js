@@ -56,32 +56,37 @@ async function loadProjects() {
         const response = await fetch('./projects.json');
         const projects = await response.json();
 
-        // Build project cards
-        grid.innerHTML = projects.map(function(project) {
-            return `
-                <a href="${project.link}" class="project-card-link">
-                    <div class="project-card" aria-label="${project.title}">
-                        <div class="project-card-bg" style="background-image: url('${project.image}')"></div>
-                        <div class="project-card-overlay">
-                            <span class="project-card-title">${project.title}</span>
+        // Group projects by client
+        const clients = {};
+        projects.forEach(function(project) {
+            if (!clients[project.client]) {
+                clients[project.client] = [];
+            }
+            clients[project.client].push(project);
+        });
+
+        // Build HTML grouped by client
+        grid.innerHTML = Object.entries(clients).map(function([clientName, clientProjects]) {
+            const cards = clientProjects.map(function(project) {
+                return `
+                    <a href="${project.link}" class="project-card-link">
+                        <div class="project-card" aria-label="${project.title}">
+                            <div class="project-card-bg" style="background-image: url('${project.image}')"></div>
+                            <div class="project-card-overlay">
+                                <span class="project-card-title">${project.title}</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                `;
+            }).join('');
+
+            return `
+                <div class="client-section">
+                    <h2 class="client-name">${clientName}</h2>
+                    <div class="client-grid">${cards}</div>
+                </div>
             `;
         }).join('');
-
-        // Animate cards in with ScrollTrigger
-        gsap.from('.project-card', {
-            scrollTrigger: {
-                trigger: '.project-grid',
-                start: 'top 85%',
-            },
-            opacity: 0,
-            y: 40,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: 'power3.out'
-        });
 
     } catch (error) {
         grid.innerHTML = '<p>Could not load projects.</p>';
