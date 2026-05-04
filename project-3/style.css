@@ -228,22 +228,18 @@ body {
 
 .about-grid {
     display: grid;
-    grid-template-columns: 0.6fr 1.5fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 6rem;
     align-items: center;
 }
 
-.about-image-placeholder {
+.about-image {
     width: 100%;
     aspect-ratio: 3/4;
-    background: #e8e8e4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: var(--muted);
+    object-fit: cover;
+    object-position: top;
     border-radius: 4px;
+    display: block;
 }
 
 .about-content .page-title {
