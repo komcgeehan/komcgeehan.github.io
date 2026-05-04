@@ -226,8 +226,6 @@ body {
     font-weight: 300;
     margin-bottom: 1.5rem;
     color: var(--text);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
 }
 
 .client-grid {
@@ -241,15 +239,15 @@ body {
 }
 
 .client-grid::-webkit-scrollbar {
-    height: 4px;
+    height: 2px;
 }
 
 .client-grid::-webkit-scrollbar-track {
-    background: var(--border);
+    background: transparent;
 }
 
 .client-grid::-webkit-scrollbar-thumb {
-    background: var(--muted);
+    background: var(--border);
     border-radius: 2px;
 }
 
