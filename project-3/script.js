@@ -28,7 +28,7 @@ if (document.querySelector('.hero-title')) {
   
     setTimeout(function() {
     new Typed('#typed-text', {
-        strings: ['Words and ideas can change the world.'],
+        strings: ['Reader. Writer. Oxford Comma Enthusiast.'],
         typeSpeed: 60,
         backSpeed: 30,
         backDelay: 2000,
