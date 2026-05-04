@@ -231,9 +231,31 @@ body {
 }
 
 .client-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: row;
     gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.client-grid::-webkit-scrollbar {
+    height: 4px;
+}
+
+.client-grid::-webkit-scrollbar-track {
+    background: var(--border);
+}
+
+.client-grid::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 2px;
+}
+
+.client-grid .project-card-link {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
 }
 
 .loading {
