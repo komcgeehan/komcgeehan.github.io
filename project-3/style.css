@@ -234,26 +234,19 @@ body {
     gap: 0.75rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
 .client-grid::-webkit-scrollbar {
-    height: 2px;
-}
-
-.client-grid::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.client-grid::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 2px;
+    display: none;
 }
 
 .client-grid .project-card-link {
-    flex: 0 0 320px;
+    flex: 0 0 calc(33% - 0.5rem);
     scroll-snap-align: start;
+    min-width: 280px;
 }
 
 .loading {
