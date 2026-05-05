@@ -123,22 +123,24 @@
             position: relative;
             display: flex;
             gap: 3rem;
-            align-items: stretch;
+            align-items: flex-start;
         }
 
-        .ann-cards-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 0;
-            padding-top: 0;
-            position: relative;
+        /* Full-wrap SVG sits behind everything, covers both columns */
+        .ann-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
         }
 
         .email-img-col {
             flex: 0 0 380px;
             position: relative;
+            z-index: 1;
         }
 
         .email-img {
@@ -148,7 +150,6 @@
             display: block;
         }
 
-        /* Annotation dots — sit on right edge of image */
         .ann-dot {
             position: absolute;
             right: -12px;
@@ -162,30 +163,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: default;
-            z-index: 2;
+            z-index: 3;
             box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
         }
 
-
+        .ann-cards-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding-top: 0;
+            position: relative;
+            z-index: 1;
+        }
 
         .ann-card {
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 6px;
             padding: 1rem 1.1rem;
-            position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .ann-card::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 50%;
-            width: 2rem;
-            height: 1px;
-            border-top: 1.5px dashed rgba(212,116,140,0.5);
         }
 
         .ann-card-title {
@@ -294,15 +290,14 @@
         <p class="email-section-label">The email</p>
         <div class="annotated-wrap" id="ann-wrap">
 
+            <!-- Full-wrap SVG for curvy connector lines -->
+            <svg class="ann-svg" id="ann-svg"></svg>
+
             <div class="email-img-col" id="img-col">
                 <img src="../images/project-1-email.jpg" alt="Skylar Astin Make-A-Wish email screenshot" class="email-img" id="email-img">
-
-                <!-- Dot 1: header area, very top -->
-                <div class="ann-dot" style="top: calc(3% - 12px);">1</div>
-                <!-- Dot 2: "Wish kids are waiting in the wings" -->
-                <div class="ann-dot" style="top: calc(58% - 12px);">2</div>
-                <!-- Dot 3: bold urgency paragraph -->
-                <div class="ann-dot" style="top: calc(68% - 12px);">3</div>
+                <div class="ann-dot" id="dot-1" style="top: calc(3% - 12px);">1</div>
+                <div class="ann-dot" id="dot-2" style="top: calc(58% - 12px);">2</div>
+                <div class="ann-dot" id="dot-3" style="top: calc(68% - 12px);">3</div>
             </div>
 
             <div class="ann-cards-col" id="ann-cards">
@@ -346,6 +341,56 @@
         gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
         gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
         gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+
+        function drawConnectors() {
+            const wrap = document.getElementById('ann-wrap');
+            const svg = document.getElementById('ann-svg');
+            svg.innerHTML = '';
+
+            const wrapRect = wrap.getBoundingClientRect();
+
+            const pairs = [
+                { dotId: 'dot-1', cardId: 'card-1' },
+                { dotId: 'dot-2', cardId: 'card-2' },
+                { dotId: 'dot-3', cardId: 'card-3' },
+            ];
+
+            // Set SVG viewBox to match wrap pixel size
+            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+
+            pairs.forEach(function(pair) {
+                const dot = document.getElementById(pair.dotId);
+                const card = document.getElementById(pair.cardId);
+                if (!dot || !card) return;
+
+                const dotRect = dot.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+
+                // All positions relative to the wrap container
+                const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
+                const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
+                const x2 = cardRect.left - wrapRect.left;
+                const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
+
+                // Cubic bezier: control points curve out horizontally
+                const cp1x = x1 + (x2 - x1) * 0.4;
+                const cp2x = x2 - (x2 - x1) * 0.4;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
+                path.setAttribute('stroke', '#d4748c');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '5 4');
+                path.setAttribute('opacity', '0.55');
+                svg.appendChild(path);
+            });
+        }
+
+        const img = document.getElementById('email-img');
+        function init() { drawConnectors(); }
+        if (img.complete) { init(); } else { img.addEventListener('load', init); }
+        window.addEventListener('resize', drawConnectors);
     </script>
 
 </body>
