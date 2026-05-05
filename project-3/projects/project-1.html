@@ -126,7 +126,8 @@
             align-items: flex-start;
         }
 
-        /* Full-wrap SVG sits behind everything, covers both columns */
+        /* Cards column must match the image height */
+        /* Full-wrap SVG sits behind everything */
         .ann-svg {
             position: absolute;
             inset: 0;
@@ -139,6 +140,12 @@
 
         .email-img-col {
             flex: 0 0 380px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ann-cards-col {
+            flex: 1;
             position: relative;
             z-index: 1;
         }
@@ -169,15 +176,15 @@
 
         .ann-cards-col {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            padding-top: 0;
             position: relative;
             z-index: 1;
+            min-height: 100%;
         }
 
         .ann-card {
+            position: absolute;
+            left: 0;
+            right: 0;
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 6px;
@@ -300,16 +307,16 @@
                 <div class="ann-dot" id="dot-3" style="top: calc(72% - 12px);">3</div>
             </div>
 
-            <div class="ann-cards-col" id="ann-cards">
-                <div class="ann-card" id="card-1">
+            <div class="ann-cards-col" id="ann-cards" style="height: 0;">
+                <div class="ann-card" id="card-1" style="top: calc(3% - 12px);">
                     <div class="ann-card-title">Subject line as emotional entry point</div>
                     <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco.</div>
                 </div>
-                <div class="ann-card" id="card-2">
+                <div class="ann-card" id="card-2" style="top: calc(60% - 12px);">
                     <div class="ann-card-title">Theatrical language mirrors the celebrity voice</div>
                     <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div>
                 </div>
-                <div class="ann-card" id="card-3">
+                <div class="ann-card" id="card-3" style="top: calc(72% - 12px);">
                     <div class="ann-card-title">Urgency built from facts, not pressure</div>
                     <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
                 </div>
@@ -342,21 +349,29 @@
         gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
         gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
 
+        function init() {
+            const img = document.getElementById('email-img');
+            const cardsCol = document.getElementById('ann-cards');
+
+            // Match cards column height to image height
+            cardsCol.style.height = img.offsetHeight + 'px';
+
+            drawConnectors();
+        }
+
         function drawConnectors() {
             const wrap = document.getElementById('ann-wrap');
             const svg = document.getElementById('ann-svg');
             svg.innerHTML = '';
 
             const wrapRect = wrap.getBoundingClientRect();
+            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
 
             const pairs = [
                 { dotId: 'dot-1', cardId: 'card-1' },
                 { dotId: 'dot-2', cardId: 'card-2' },
                 { dotId: 'dot-3', cardId: 'card-3' },
             ];
-
-            // Set SVG viewBox to match wrap pixel size
-            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
 
             pairs.forEach(function(pair) {
                 const dot = document.getElementById(pair.dotId);
@@ -366,15 +381,13 @@
                 const dotRect = dot.getBoundingClientRect();
                 const cardRect = card.getBoundingClientRect();
 
-                // All positions relative to the wrap container
                 const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
                 const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
                 const x2 = cardRect.left - wrapRect.left;
                 const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
 
-                // Cubic bezier: control points curve out horizontally
-                const cp1x = x1 + (x2 - x1) * 0.4;
-                const cp2x = x2 - (x2 - x1) * 0.4;
+                const cp1x = x1 + (x2 - x1) * 0.5;
+                const cp2x = x2 - (x2 - x1) * 0.2;
 
                 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
@@ -388,9 +401,8 @@
         }
 
         const img = document.getElementById('email-img');
-        function init() { drawConnectors(); }
         if (img.complete) { init(); } else { img.addEventListener('load', init); }
-        window.addEventListener('resize', drawConnectors);
+        window.addEventListener('resize', init);
     </script>
 
 </body>
