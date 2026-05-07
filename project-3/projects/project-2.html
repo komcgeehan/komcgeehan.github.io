@@ -336,8 +336,7 @@
             </div>
             <div>
                 <p class="case-field-label">Result</p>
-                <p class="case-field-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-            </div>
+                <p class="case-field-body">Sent across four audience versions — donors, lapsed donors, sustainers, and Circle of Stars members — with content blocks tailored to each relationship tier while maintaining a single cohesive editorial voice.</p>            </div>
         </div>
 
     </main>
@@ -352,10 +351,7 @@
         function init() {
             const img = document.getElementById('email-img');
             const cardsCol = document.getElementById('ann-cards');
-
-            // Match cards column height to image height
             cardsCol.style.height = img.offsetHeight + 'px';
-
             drawConnectors();
         }
 
@@ -363,32 +359,25 @@
             const wrap = document.getElementById('ann-wrap');
             const svg = document.getElementById('ann-svg');
             svg.innerHTML = '';
-
             const wrapRect = wrap.getBoundingClientRect();
             svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
-
             const pairs = [
                 { dotId: 'dot-1', cardId: 'card-1' },
                 { dotId: 'dot-2', cardId: 'card-2' },
                 { dotId: 'dot-3', cardId: 'card-3' },
             ];
-
             pairs.forEach(function(pair) {
                 const dot = document.getElementById(pair.dotId);
                 const card = document.getElementById(pair.cardId);
                 if (!dot || !card) return;
-
                 const dotRect = dot.getBoundingClientRect();
                 const cardRect = card.getBoundingClientRect();
-
                 const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
                 const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
                 const x2 = cardRect.left - wrapRect.left;
                 const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
-
                 const cp1x = x1 + (x2 - x1) * 0.5;
                 const cp2x = x2 - (x2 - x1) * 0.2;
-
                 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
                 path.setAttribute('stroke', '#d4748c');
