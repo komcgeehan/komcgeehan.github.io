@@ -3,31 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Nine — Kate McGeehan</title>
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Make-A-Wish July DCO Ads — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.ico">
     <link rel="stylesheet" href="../style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap">
+    <style>
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .dco-explainer {
+            background: #f5f5f3;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.75;
+            font-weight: 300;
+        }
+
+        .dco-explainer strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .shared-copy {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .shared-copy-item-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .shared-copy-item-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .ad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .ad-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ad-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .ad-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+        }
+
+        .ad-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .ad-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .case-study {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-field-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+        }
+
+        .case-field-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .ad-grid { grid-template-columns: 1fr 1fr; }
+            .shared-copy { grid-template-columns: 1fr; gap: 1.5rem; }
+            .case-study { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
 </head>
 <body>
+
     <nav class="navbar" aria-label="Main navigation">
         <a href="../index.html" class="logo">KM</a>
         <ul class="nav-links">
-            <li><a href="../work.html">Portfolio</a></li>
+            <li><a href="../work.html" class="active">Portfolio</a></li>
             <li><a href="../about.html">About</a></li>
         </ul>
     </nav>
-    <main class="project-main">
-        <div class="project-page-header">
-            <a href="../work.html" class="back-link" aria-label="Back to work">← Back</a>
-            <span class="project-page-category">Digital Campaign</span>
-            <h1 class="project-page-title">Project Nine</h1>
-            <p class="project-page-meta">XXCHANGE ME DATEXX</p>
+
+    <main class="project-main" style="max-width: 960px;">
+
+        <a href="../work.html" class="back-link">← Back to portfolio</a>
+
+        <span class="project-page-category">Make-A-Wish · Display Advertising</span>
+        <h1 class="project-page-title">July DCO Ads</h1>
+        <p class="project-page-meta">Dynamic Creative Optimization · Display Campaign · July 2025</p>
+
+        <div class="dco-explainer">
+            <strong>How DCO works:</strong> Dynamic creative optimization serves personalized ad variations to different audiences in real time. One set of copy runs across all variations — the headline and CTA stay consistent — while the image rotates based on audience data. Every creative element has to work with every image, which means the copy has to be broad enough to hold across a child in a hospital bed, a child on a wish day, and a medical professional, without losing its emotional specificity.
         </div>
-        <div class="project-page-image-placeholder" aria-label="Project image">Image placeholder</div>
-        <div class="project-page-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+        <p class="section-label">The shared copy</p>
+        <div class="shared-copy">
+            <div>
+                <p class="shared-copy-item-label">Headline</p>
+                <p class="shared-copy-item-value">8 out of 10 kids say their wish gave them the strength to fight.</p>
+            </div>
+            <div>
+                <p class="shared-copy-item-label">Call to Action</p>
+                <p class="shared-copy-item-value">Grant Wishes Now</p>
+            </div>
         </div>
+
+        <p class="section-label">The creative variations</p>
+        <div class="ad-grid">
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-1.jpg" alt="Jayce on his wish day dressed as a firefighter" class="ad-img">
+                <div>
+                    <p class="ad-label">Wish Day · Jayce, 4</p>
+                    <p class="ad-title">Kidney transplant · I wish to be a firefighter</p>
+                    <p class="ad-desc">Jayce in his firefighter gear on wish day — the aspirational image pairs naturally with the resilience headline.</p>
+                </div>
+            </div>
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-2.jpg" alt="Seven on her wish day as a chef" class="ad-img">
+                <div>
+                    <p class="ad-label">Wish Day · Seven, 12</p>
+                    <p class="ad-title">End-stage kidney disease · I wish to be a chef</p>
+                    <p class="ad-desc">Seven in her chef's whites — the contrast between her diagnosis and the bright pink apron does the emotional work before the headline lands.</p>
+                </div>
+            </div>
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-3.jpg" alt="Dr. Anup Patel pediatric neurologist" class="ad-img">
+                <div>
+                    <p class="ad-label">Medical Perspective · Dr. Anup Patel</p>
+                    <p class="ad-title">Pediatric neurologist endorsement</p>
+                    <p class="ad-desc">A physician voice adds clinical credibility to the stat — "The impact a wish has... is pretty endless" bridges the emotional and the evidence-based.</p>
+                </div>
+            </div>
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-4.jpg" alt="Hunter with his dinosaur toy" class="ad-img">
+                <div>
+                    <p class="ad-label">Wish Day · Hunter, 6</p>
+                    <p class="ad-title">Leukemia · I wish to be a dinosaur</p>
+                    <p class="ad-desc">Hunter's laugh and his dinosaur toy communicate joy with no copy needed — the headline arrives as confirmation of what the image already shows.</p>
+                </div>
+            </div>
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-5.jpg" alt="Jayce in hospital before his wish" class="ad-img">
+                <div>
+                    <p class="ad-label">Before · Jayce, 4</p>
+                    <p class="ad-title">Kidney transplant · Hospital context</p>
+                    <p class="ad-desc">Jayce in his hospital bed — the before image anchors the stat in the reality of illness, making the "strength to fight" headline land with more weight.</p>
+                </div>
+            </div>
+
+            <div class="ad-card">
+                <img src="../images/project-9-ad-6.jpg" alt="Seven in hospital before her wish" class="ad-img">
+                <div>
+                    <p class="ad-label">Before · Seven, 12</p>
+                    <p class="ad-title">End-stage kidney disease · Hospital context</p>
+                    <p class="ad-desc">Seven smiling despite her diagnosis — the contrast between her expression and her circumstances is what makes the resilience stat feel true rather than promotional.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="case-study">
+            <div>
+                <p class="case-field-label">Brief</p>
+                <p class="case-field-body">A DCO display campaign for Make-A-Wish using a single headline and CTA across six rotating image variations — wish day photos, hospital context shots, and a medical professional endorsement — served programmatically in July 2025.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Approach</p>
+                <p class="case-field-body">Wrote copy broad enough to hold across every image variation without losing its emotional specificity. The stat-forward headline gives the rotating images room to provide the human context, rather than the copy having to carry it alone.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Result</p>
+                <p class="case-field-body">The headline works equally well against aspirational wish day images and more clinical hospital photography — giving the media team flexibility to optimize toward whichever creative combination performs best with each audience segment.</p>
+            </div>
+        </div>
+
     </main>
-    <script src="../script.js"></script>
+
+    <script>
+        gsap.from('.project-page-category', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.project-page-title', { opacity: 0, y: 30, duration: 1, delay: 0.15, ease: 'power3.out' });
+        gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.dco-explainer', { opacity: 0, y: 20, duration: 0.8, delay: 0.4, ease: 'power3.out' });
+        gsap.from('.ad-card', { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, delay: 0.5, ease: 'power3.out' });
+        gsap.from('.case-study', { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power3.out' });
+    </script>
+
 </body>
 </html>
