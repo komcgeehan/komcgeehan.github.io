@@ -243,10 +243,65 @@
             }
             .ann-svg { display: none; }
             .ann-dot { display: none; }
+            .ann-cards-col { display: none; }
             .case-study {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+        }
+
+        /* ---- MOBILE ANNOTATION LIST ---- */
+        .ann-list {
+            display: none;
+            margin-top: 1.5rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ann-list-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+        }
+
+        .ann-list-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        .ann-list-content {}
+
+        .ann-list-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-list-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .ann-list { display: flex; }
         }
     </style>
     <script src="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"></script>
@@ -324,7 +379,30 @@
 
         </div>
 
-        <!-- CASE STUDY -->
+        <!-- MOBILE ANNOTATION LIST (hidden on desktop) -->
+        <div class="ann-list" aria-label="Email annotations">
+            <div class="ann-list-item">
+                <div class="ann-list-number">1</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Subject line as emotional entry point</div>
+                    <div class="ann-list-body">Leading with "help a wish kid's heart sing" borrows Skylar Astin's theatrical frame before the donor even opens the email. The personalization token and the 4X match sit in the same line — pairing emotion with incentive from the first word.</div>
+                </div>
+            </div>
+            <div class="ann-list-item">
+                <div class="ann-list-number">2</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Theatrical language mirrors the celebrity voice</div>
+                    <div class="ann-list-body">Skylar Astin is an actor and musical theatre performer, so the copy leans into performance language — "heart sing," "stage," "encore." The celebrity voice has to feel consistent with who they are, not just borrowed for a signature line.</div>
+                </div>
+            </div>
+            <div class="ann-list-item">
+                <div class="ann-list-number">3</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Urgency built from facts, not pressure</div>
+                    <div class="ann-list-body">The waiting list stat — children who qualify for a wish but haven't received one — does the urgency work without manufactured scarcity. The 4X match deadline gives donors a concrete reason to act today rather than later.</div>
+                </div>
+            </div>
+        </div>
         <div class="case-study">
             <div>
                 <p class="case-field-label">Brief</p>
@@ -356,7 +434,10 @@
             // Match cards column height to image height
             cardsCol.style.height = img.offsetHeight + 'px';
 
-            drawConnectors();
+            // Use rAF to ensure layout is fully settled before measuring
+            requestAnimationFrame(function() {
+                requestAnimationFrame(drawConnectors);
+            });
         }
 
         function drawConnectors() {
@@ -401,8 +482,16 @@
         }
 
         const img = document.getElementById('email-img');
-        if (img.complete) { init(); } else { img.addEventListener('load', init); }
-        window.addEventListener('resize', init);
+        // Delay init until after GSAP entrance animation completes (0.6s delay + 0.8s duration)
+        function startInit() {
+            setTimeout(init, 1500);
+        }
+        if (img.complete) { startInit(); } else { img.addEventListener('load', startInit); }
+        window.addEventListener('resize', function() {
+            requestAnimationFrame(function() {
+                requestAnimationFrame(drawConnectors);
+            });
+        });
     </script>
 
 </body>
