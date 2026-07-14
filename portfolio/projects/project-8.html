@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan International USA Drought Stewardship Email — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.ico">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* ---- INBOX PREVIEW ---- */
+        .inbox-wrap {
+            margin-bottom: 3rem;
+        }
+
+        .inbox-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .inbox-chrome {
+            background: #f5f5f3;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .inbox-chrome-bar {
+            background: #e8e8e4;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .inbox-row {
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+        }
+
+        .inbox-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #003087;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .inbox-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .inbox-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .inbox-sender {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .inbox-date {
+            font-size: 0.75rem;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .inbox-subject {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .inbox-preheader {
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ---- ANNOTATED EMAIL ---- */
+        .email-section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .annotated-wrap {
+            position: relative;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        /* Cards column must match the image height */
+        /* Full-wrap SVG sits behind everything */
+        .ann-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .email-img-col {
+            flex: 0 0 380px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ann-cards-col {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .email-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .ann-dot {
+            position: absolute;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        .ann-cards-col {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+        }
+
+        .ann-card {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+        }
+
+        .ann-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-card-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ---- CASE STUDY ---- */
+        .case-study {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-field-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+        }
+
+        .case-field-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .annotated-wrap {
+                flex-direction: column;
+            }
+            .email-img-col {
+                flex: none;
+                width: 100%;
+            }
+            .ann-svg { display: none; }
+            .ann-dot { display: none; }
+            .case-study {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+    <script src="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap">
+</head>
+<body>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="../index.html" class="logo">KM</a>
+        <ul class="nav-links">
+            <li><a href="../work.html" class="active">Portfolio</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="project-main" style="max-width: 960px;">
+
+        <a href="../work.html" class="back-link">← Back to portfolio</a>
+
+        <span class="project-page-category">Plan International USA · Email Copywriting</span>
+        <h1 class="project-page-title">Drought Stewardship<br>Email</h1>
+        <p class="project-page-meta">Extreme Heat Campaign · July 2025</p>
+
+        <!-- INBOX PREVIEW -->
+        <div class="inbox-wrap">
+            <p class="inbox-label">How it lands in the inbox</p>
+            <div class="inbox-chrome">
+                <div class="inbox-chrome-bar">
+                    <div class="dot" style="background:#ed6a5a;"></div>
+                    <div class="dot" style="background:#f5ac45;"></div>
+                    <div class="dot" style="background:#71c442;"></div>
+                </div>
+                <div class="inbox-row">
+                    <div class="inbox-avatar" style="background: #0072CE;">PLAN</div>
+                    <div class="inbox-body">
+                        <div class="inbox-top">
+                            <span class="inbox-sender">Plan International USA</span>
+                            <span class="inbox-date">Jul 2025</span>
+                        </div>
+                        <div class="inbox-subject">This is what your support means!</div>
+                        <div class="inbox-preheader">Thank you for being there for girls like Wane.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANNOTATED EMAIL -->
+        <p class="email-section-label">The email</p>
+        <div class="annotated-wrap" id="ann-wrap">
+
+            <!-- Full-wrap SVG for curvy connector lines -->
+            <svg class="ann-svg" id="ann-svg"></svg>
+
+            <div class="email-img-col" id="img-col">
+                <img src="../images/project-8-email.jpg" alt="Plan International USA Drought Stewardship email screenshot" class="email-img" id="email-img">
+                <div class="ann-dot" id="dot-1" style="top: calc(18% - 12px);">1</div>
+                <div class="ann-dot" id="dot-2" style="top: calc(52% - 12px);">2</div>
+                <div class="ann-dot" id="dot-3" style="top: calc(88% - 12px);">3</div>
+            </div>
+
+            <div class="ann-cards-col" id="ann-cards" style="height: 0;">
+                <div class="ann-card" id="card-1" style="top: calc(18% - 12px);">
+                    <div class="ann-card-title">Donor-centric language turns stewardship into recognition</div>
+                    <div class="ann-card-body">"Thank YOU for supporting girls like Wane" puts the donor in the headline — not Plan, not Wane. Good stewardship copy makes the donor feel like the protagonist of the story, not a bystander to it.</div>
+                </div>
+                <div class="ann-card" id="card-2" style="top: calc(52% - 12px);">
+                    <div class="ann-card-title">A specific, unexpected outcome builds donor trust</div>
+                    <div class="ann-card-body">Hydroponic farming in a school greenhouse is a concrete, surprising detail — the kind donors remember. Vague impact claims erode trust; this kind of specificity earns it back and keeps donors invested in what happens next.</div>
+                </div>
+                <div class="ann-card" id="card-3" style="top: calc(88% - 12px);">
+                    <div class="ann-card-title">The sign-off builds community, not just gratitude</div>
+                    <div class="ann-card-body">"We wouldn't have achieved any of this without people like you" positions the donor as part of a collective — not a transactional contributor. That shift from "thank you for giving" to "you made this possible" is what turns one-time donors into long-term supporters.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CASE STUDY -->
+        <div class="case-study">
+            <div>
+                <p class="case-field-label">Brief</p>
+                <p class="case-field-body">A mid-campaign stewardship email sent to active donors and lapsed OTG supporters during Plan International USA's Extreme Heat campaign, showing the on-the-ground impact of their gifts during Zambia's worst drought in decades.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Approach</p>
+                <p class="case-field-body">Centered the email on a single, specific story — Wane and her school's hydroponic greenhouse — to give donors a tangible outcome rather than a generic impact statement. Donor-first language throughout keeps the stewardship feeling personal and earned rather than formulaic.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Result</p>
+                <p class="case-field-body">Deployed mid-campaign to active donors and lapsed OTG supporters, the email reinforced Plan's impact story during a prolonged emergency appeal without defaulting to another direct ask.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        gsap.from('.project-page-category', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.project-page-title', { opacity: 0, y: 30, duration: 1, delay: 0.15, ease: 'power3.out' });
+        gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
+        gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+
+        function init() {
+            const img = document.getElementById('email-img');
+            const cardsCol = document.getElementById('ann-cards');
+
+            // Match cards column height to image height
+            cardsCol.style.height = img.offsetHeight + 'px';
+
+            drawConnectors();
+        }
+
+        function drawConnectors() {
+            const wrap = document.getElementById('ann-wrap');
+            const svg = document.getElementById('ann-svg');
+            svg.innerHTML = '';
+
+            const wrapRect = wrap.getBoundingClientRect();
+            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+
+            const pairs = [
+                { dotId: 'dot-1', cardId: 'card-1' },
+                { dotId: 'dot-2', cardId: 'card-2' },
+                { dotId: 'dot-3', cardId: 'card-3' },
+            ];
+
+            pairs.forEach(function(pair) {
+                const dot = document.getElementById(pair.dotId);
+                const card = document.getElementById(pair.cardId);
+                if (!dot || !card) return;
+
+                const dotRect = dot.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+
+                const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
+                const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
+                const x2 = cardRect.left - wrapRect.left;
+                const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
+
+                const cp1x = x1 + (x2 - x1) * 0.5;
+                const cp2x = x2 - (x2 - x1) * 0.2;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
+                path.setAttribute('stroke', '#d4748c');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '5 4');
+                path.setAttribute('opacity', '0.55');
+                svg.appendChild(path);
+            });
+        }
+
+        const img = document.getElementById('email-img');
+        if (img.complete) { init(); } else { img.addEventListener('load', init); }
+        window.addEventListener('resize', init);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make-A-Wish Celebrity Appeal — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.ico">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* ---- INBOX PREVIEW ---- */
+        .inbox-wrap {
+            margin-bottom: 3rem;
+        }
+
+        .inbox-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .inbox-chrome {
+            background: #f5f5f3;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .inbox-chrome-bar {
+            background: #e8e8e4;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .inbox-row {
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+        }
+
+        .inbox-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #003087;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .inbox-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .inbox-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .inbox-sender {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .inbox-date {
+            font-size: 0.75rem;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .inbox-subject {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .inbox-preheader {
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ---- ANNOTATED EMAIL ---- */
+        .email-section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .annotated-wrap {
+            position: relative;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        /* Cards column must match the image height */
+        /* Full-wrap SVG sits behind everything */
+        .ann-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .email-img-col {
+            flex: 0 0 380px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ann-cards-col {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .email-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .ann-dot {
+            position: absolute;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        .ann-cards-col {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+        }
+
+        .ann-card {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+        }
+
+        .ann-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-card-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ---- CASE STUDY ---- */
+        .case-study {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-field-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+        }
+
+        .case-field-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .annotated-wrap {
+                flex-direction: column;
+            }
+            .email-img-col {
+                flex: none;
+                width: 100%;
+            }
+            .ann-svg { display: none; }
+            .ann-dot { display: none; }
+            .ann-cards-col { display: none; }
+            .case-study {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ---- MOBILE ANNOTATION LIST ---- */
+        .ann-list {
+            display: none;
+            margin-top: 1.5rem;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ann-list-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+        }
+
+        .ann-list-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        .ann-list-content {}
+
+        .ann-list-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-list-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .ann-list { display: flex; }
+        }
+    </style>
+    <script src="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap">
+</head>
+<body>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="../index.html" class="logo">KM</a>
+        <ul class="nav-links">
+            <li><a href="../work.html" class="active">Portfolio</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="project-main" style="max-width: 960px;">
+
+        <a href="../work.html" class="back-link">← Back to portfolio</a>
+
+        <span class="project-page-category">Make-A-Wish · Email Copywriting</span>
+        <h1 class="project-page-title">Celebrity Appeal:<br>Skylar Astin</h1>
+        <p class="project-page-meta">World Wish Month · 4X Match Campaign · April 2026</p>
+
+        <!-- INBOX PREVIEW -->
+        <div class="inbox-wrap">
+            <p class="inbox-label">How it lands in the inbox</p>
+            <div class="inbox-chrome">
+                <div class="inbox-chrome-bar">
+                    <div class="dot" style="background:#ed6a5a;"></div>
+                    <div class="dot" style="background:#f5ac45;"></div>
+                    <div class="dot" style="background:#71c442;"></div>
+                </div>
+                <div class="inbox-row">
+                    <div class="inbox-avatar">MAW</div>
+                    <div class="inbox-body">
+                        <div class="inbox-top">
+                            <span class="inbox-sender">Skylar Astin via Make-A-Wish</span>
+                            <span class="inbox-date">Apr 2026</span>
+                        </div>
+                        <div class="inbox-subject">4X match: Help a wish kid's heart sing, FirstName</div>
+                        <div class="inbox-preheader">Donate now and help 4X as many waiting wish kids find the hope and strength to keep fighting.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANNOTATED EMAIL -->
+        <p class="email-section-label">The email</p>
+        <div class="annotated-wrap" id="ann-wrap">
+
+            <!-- Full-wrap SVG for curvy connector lines -->
+            <svg class="ann-svg" id="ann-svg"></svg>
+
+            <div class="email-img-col" id="img-col">
+                <img src="../images/project-1-email.jpg" alt="Skylar Astin Make-A-Wish email screenshot" class="email-img" id="email-img">
+                <div class="ann-dot" id="dot-1" style="top: calc(3% - 12px);">1</div>
+                <div class="ann-dot" id="dot-2" style="top: calc(48% - 12px);">2</div>
+                <div class="ann-dot" id="dot-3" style="top: calc(72% - 12px);">3</div>
+            </div>
+
+            <div class="ann-cards-col" id="ann-cards" style="height: 0;">
+                <div class="ann-card" id="card-1" style="top: calc(3% - 12px);">
+                    <div class="ann-card-title">Subject line as emotional entry point</div>
+                    <div class="ann-card-body">Leading with "help a wish kid's heart sing" borrows Skylar Astin's theatrical frame before the donor even opens the email. The personalization token and the 4X match sit in the same line — pairing emotion with incentive from the first word.</div>
+                </div>
+                <div class="ann-card" id="card-2" style="top: calc(48% - 12px);">
+                    <div class="ann-card-title">Theatrical language mirrors the celebrity voice</div>
+                    <div class="ann-card-body">Skylar Astin is an actor and musical theatre performer, so the copy leans into performance language — "heart sing," "stage," "encore." The celebrity voice has to feel consistent with who they are, not just borrowed for a signature line.</div>
+                </div>
+                <div class="ann-card" id="card-3" style="top: calc(72% - 12px);">
+                    <div class="ann-card-title">Urgency built from facts, not pressure</div>
+                    <div class="ann-card-body">The waiting list stat — children who qualify for a wish but haven't received one — does the urgency work without manufactured scarcity. The 4X match deadline gives donors a concrete reason to act today rather than later.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MOBILE ANNOTATION LIST (hidden on desktop) -->
+        <div class="ann-list" aria-label="Email annotations">
+            <div class="ann-list-item">
+                <div class="ann-list-number">1</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Subject line as emotional entry point</div>
+                    <div class="ann-list-body">Leading with "help a wish kid's heart sing" borrows Skylar Astin's theatrical frame before the donor even opens the email. The personalization token and the 4X match sit in the same line — pairing emotion with incentive from the first word.</div>
+                </div>
+            </div>
+            <div class="ann-list-item">
+                <div class="ann-list-number">2</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Theatrical language mirrors the celebrity voice</div>
+                    <div class="ann-list-body">Skylar Astin is an actor and musical theatre performer, so the copy leans into performance language — "heart sing," "stage," "encore." The celebrity voice has to feel consistent with who they are, not just borrowed for a signature line.</div>
+                </div>
+            </div>
+            <div class="ann-list-item">
+                <div class="ann-list-number">3</div>
+                <div class="ann-list-content">
+                    <div class="ann-list-title">Urgency built from facts, not pressure</div>
+                    <div class="ann-list-body">The waiting list stat — children who qualify for a wish but haven't received one — does the urgency work without manufactured scarcity. The 4X match deadline gives donors a concrete reason to act today rather than later.</div>
+                </div>
+            </div>
+        </div>
+        <div class="case-study">
+            <div>
+                <p class="case-field-label">Brief</p>
+                <p class="case-field-body">A World Wish Month celebrity appeal co-signed by Skylar Astin, written for Make-A-Wish donors and prospects during a 4X match window in April 2026.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Approach</p>
+                <p class="case-field-body">Built the copy around Skylar's identity as a performer rather than a generic celebrity endorsement — using theatrical language to make the celebrity voice feel authentic rather than borrowed.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Result</p>
+                <p class="case-field-body">Deployed to donors, lapsed donors, and prospects during World Wish Month as part of Make-A-Wish's highest-revenue fundraising period of the year.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        gsap.from('.project-page-category', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.project-page-title', { opacity: 0, y: 30, duration: 1, delay: 0.15, ease: 'power3.out' });
+        gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
+        gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+
+        function init() {
+            const img = document.getElementById('email-img');
+            const cardsCol = document.getElementById('ann-cards');
+
+            // Match cards column height to image height
+            cardsCol.style.height = img.offsetHeight + 'px';
+
+            // Use rAF to ensure layout is fully settled before measuring
+            requestAnimationFrame(function() {
+                requestAnimationFrame(drawConnectors);
+            });
+        }
+
+        function drawConnectors() {
+            const wrap = document.getElementById('ann-wrap');
+            const svg = document.getElementById('ann-svg');
+            svg.innerHTML = '';
+
+            const wrapRect = wrap.getBoundingClientRect();
+            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+
+            const pairs = [
+                { dotId: 'dot-1', cardId: 'card-1' },
+                { dotId: 'dot-2', cardId: 'card-2' },
+                { dotId: 'dot-3', cardId: 'card-3' },
+            ];
+
+            pairs.forEach(function(pair) {
+                const dot = document.getElementById(pair.dotId);
+                const card = document.getElementById(pair.cardId);
+                if (!dot || !card) return;
+
+                const dotRect = dot.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+
+                const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
+                const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
+                const x2 = cardRect.left - wrapRect.left;
+                const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
+
+                const cp1x = x1 + (x2 - x1) * 0.5;
+                const cp2x = x2 - (x2 - x1) * 0.2;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
+                path.setAttribute('stroke', '#d4748c');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '5 4');
+                path.setAttribute('opacity', '0.55');
+                svg.appendChild(path);
+            });
+        }
+
+        const img = document.getElementById('email-img');
+        // Delay init until after GSAP entrance animation completes (0.6s delay + 0.8s duration)
+        function startInit() {
+            setTimeout(init, 1500);
+        }
+        if (img.complete) { startInit(); } else { img.addEventListener('load', startInit); }
+        window.addEventListener('resize', function() {
+            requestAnimationFrame(function() {
+                requestAnimationFrame(drawConnectors);
+            });
+        });
+    </script>
+
+</body>
+</html>

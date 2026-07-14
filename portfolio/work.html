@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.ico">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="index.html" class="logo">KM</a>
+        <ul class="nav-links">
+            <li><a href="work.html" class="active">Portfolio</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="work-main">
+        <header class="page-header">
+            <h1 class="page-title">Portfolio</h1>
+            <p class="page-sub">A collection of nonprofit and fundraising copywriting projects.</p>
+        </header>
+
+        <div class="project-grid" id="project-grid" aria-label="Project list">
+            <div class="loading">Loading projects...</div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

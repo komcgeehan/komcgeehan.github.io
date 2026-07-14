@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan International USA Gifts of Hope — Kate McGeehan</title>
+    <link rel="icon" type="image/x-icon" href="../images/logo.ico">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap">
+    <style>
+        /* ---- INBOX PREVIEW ---- */
+        .inbox-wrap {
+            margin-bottom: 2rem;
+        }
+
+        .inbox-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .inbox-chrome {
+            background: #f5f5f3;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .inbox-chrome-bar {
+            background: #e8e8e4;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .inbox-row {
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+        }
+
+        .inbox-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #e8312a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 9px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .inbox-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .inbox-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .inbox-sender {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .inbox-date {
+            font-size: 0.75rem;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .inbox-subject {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .inbox-preheader {
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ---- ANNOTATED EMAIL ---- */
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .annotated-wrap {
+            position: relative;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+        }
+
+        .ann-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .email-img-col {
+            flex: 0 0 320px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ann-cards-col {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .email-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .ann-dot {
+            position: absolute;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            box-shadow: 0 0 0 3px rgba(212,116,140,0.2);
+        }
+
+        .ann-card {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.1rem;
+        }
+
+        .ann-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+        }
+
+        .ann-card-body {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ---- DIVIDER ---- */
+        .campaign-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        /* ---- MMS ASSET ---- */
+        .mms-wrap {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+        }
+
+        .mms-img-col {
+            flex: 0 0 260px;
+        }
+
+        .mms-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .mms-content-col {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+
+        .mms-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .mms-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .mms-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .mms-note {
+            font-size: 0.82rem;
+            color: var(--pink);
+            line-height: 1.7;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .mms-stats {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .mms-stat-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .mms-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* ---- CASE STUDY ---- */
+        .case-study {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .case-field-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 0.6rem;
+        }
+
+        .case-field-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.85;
+            font-weight: 300;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .annotated-wrap { flex-direction: column; }
+            .email-img-col { flex: none; width: 100%; }
+            .ann-svg { display: none; }
+            .ann-dot { display: none; }
+            .mms-wrap { flex-direction: column; }
+            .mms-img-col { flex: none; width: 100%; max-width: 300px; }
+            .case-study { grid-template-columns: 1fr; gap: 2rem; }
+            .mms-stats { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="../index.html" class="logo">KM</a>
+        <ul class="nav-links">
+            <li><a href="../work.html" class="active">Portfolio</a></li>
+            <li><a href="../about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="project-main" style="max-width: 960px;">
+
+        <a href="../work.html" class="back-link">← Back to portfolio</a>
+
+        <span class="project-page-category">Plan International USA · Multi-Channel Copywriting</span>
+        <h1 class="project-page-title">Gifts of Hope<br>Holiday Campaign</h1>
+        <p class="project-page-meta">Holiday Giving · 2X Match · November–December 2025</p>
+
+        <!-- ===================== GOH #2 EMAIL ===================== -->
+
+        <!-- INBOX PREVIEW -->
+        <div class="inbox-wrap">
+            <p class="inbox-label">How it lands in the inbox</p>
+            <div class="inbox-chrome">
+                <div class="inbox-chrome-bar">
+                    <div class="dot" style="background:#ed6a5a;"></div>
+                    <div class="dot" style="background:#f5ac45;"></div>
+                    <div class="dot" style="background:#71c442;"></div>
+                </div>
+                <div class="inbox-row">
+                    <div class="inbox-avatar">PLAN</div>
+                    <div class="inbox-body">
+                        <div class="inbox-top">
+                            <span class="inbox-sender">Shanna Marzilli, Plan International USA</span>
+                            <span class="inbox-date">Nov 2025</span>
+                        </div>
+                        <div class="inbox-subject">Gifts of Hope are back with 2X the power!</div>
+                        <div class="inbox-preheader">Open for the newest Gifts of Hope catalog this season.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANNOTATED EMAIL -->
+        <p class="section-label">The email</p>
+        <div class="annotated-wrap" id="ann-wrap">
+
+            <svg class="ann-svg" id="ann-svg"></svg>
+
+            <div class="email-img-col" id="img-col">
+                <img src="../images/project-10-email.jpg" alt="Plan International Gifts of Hope #2 email screenshot" class="email-img" id="email-img">
+                <div class="ann-dot" id="dot-1" style="top: calc(8% - 12px);">1</div>
+                <div class="ann-dot" id="dot-2" style="top: calc(45% - 12px);">2</div>
+                <div class="ann-dot" id="dot-3" style="top: calc(78% - 12px);">3</div>
+            </div>
+
+            <div class="ann-cards-col" id="ann-cards" style="height: 0;">
+                <div class="ann-card" id="card-1" style="top: calc(8% - 12px);">
+                    <div class="ann-card-title">A subject line that leads with the offer, not the ask</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco.</div>
+                </div>
+                <div class="ann-card" id="card-2" style="top: calc(45% - 12px);">
+                    <div class="ann-card-title">Catalog items as tangible proof of impact</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</div>
+                </div>
+                <div class="ann-card" id="card-3" style="top: calc(78% - 12px);">
+                    <div class="ann-card-title">A personal close that mirrors the donor relationship</div>
+                    <div class="ann-card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="campaign-divider">
+
+        <!-- ===================== HOLIDAY MMS ===================== -->
+        <p class="section-label">The MMS</p>
+
+        <div class="mms-wrap">
+            <div class="mms-img-col">
+                <img src="../images/project-10-mms.jpg" alt="Holiday Gifts of Hope MMS phone mockup" class="mms-img">
+            </div>
+            <div class="mms-content-col">
+                <span class="mms-label">Holiday GOH · MMS</span>
+                <p class="mms-title">Reaching donors where they are — with the catalog in hand</p>
+                <p class="mms-body">The GOH #2 email targets past Gifts of Hope purchasers — donors who already understand the catalog model and just need a timely reason to return. The subject line leads with the matched gift offer, not the catalog itself, because the match is what's new this year.</p>
+                <p class="mms-body">Each catalog item — chickens, sheep, a backpack, menstrual health kits — is presented in a single sentence with a photo, keeping the copy scannable and letting the images carry the emotional weight. The CTA arrives only after the donor has browsed the options.</p>
+                <p class="mms-note">↻ The catalog image animates as a GIF, cycling through gift options — chickens or ducks, sheep, a backpack, and menstrual health kits — before the recipient even opens the message.</p>
+                <div class="mms-stats">
+                    <div>
+                        <p class="mms-stat-label">Send Date</p>
+                        <p class="mms-stat-value">Dec 15, 2025</p>
+                    </div>
+                    <div>
+                        <p class="mms-stat-label">Characters</p>
+                        <p class="mms-stat-value">284</p>
+                    </div>
+                    <div>
+                        <p class="mms-stat-label">Audience</p>
+                        <p class="mms-stat-value">All opted-in numbers on file</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CASE STUDY -->
+        <div class="case-study">
+            <div>
+                <p class="case-field-label">Brief</p>
+                <p class="case-field-body">A November Gifts of Hope email targeting past GOH purchasers in the last two years, paired with a holiday MMS sent to all opted-in phone numbers on file.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Approach</p>
+                <p class="case-field-body">Treated returning GOH purchasers as a warm audience who already value the catalog format — leading with the match offer and letting the familiar gift items do the persuasion work.</p>
+            </div>
+            <div>
+                <p class="case-field-label">Result</p>
+                <p class="case-field-body">Part of a multi-touch holiday campaign that included three GOH emails, a Good Giving Guide, a homepage hero, and the MMS — each channel reinforcing the matched gift message across the full donor journey.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        gsap.from('.project-page-category', { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out' });
+        gsap.from('.project-page-title', { opacity: 0, y: 30, duration: 1, delay: 0.15, ease: 'power3.out' });
+        gsap.from('.project-page-meta', { opacity: 0, y: 20, duration: 0.8, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.inbox-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.45, ease: 'power3.out' });
+        gsap.from('.annotated-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+        gsap.from('.mms-wrap', { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power3.out' });
+
+        function init() {
+            const img = document.getElementById('email-img');
+            const cardsCol = document.getElementById('ann-cards');
+            cardsCol.style.height = img.offsetHeight + 'px';
+            drawConnectors();
+        }
+
+        function drawConnectors() {
+            const wrap = document.getElementById('ann-wrap');
+            const svg = document.getElementById('ann-svg');
+            svg.innerHTML = '';
+
+            const wrapRect = wrap.getBoundingClientRect();
+            svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+
+            const pairs = [
+                { dotId: 'dot-1', cardId: 'card-1' },
+                { dotId: 'dot-2', cardId: 'card-2' },
+                { dotId: 'dot-3', cardId: 'card-3' },
+            ];
+
+            pairs.forEach(function(pair) {
+                const dot = document.getElementById(pair.dotId);
+                const card = document.getElementById(pair.cardId);
+                if (!dot || !card) return;
+
+                const dotRect = dot.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+
+                const x1 = dotRect.left + dotRect.width / 2 - wrapRect.left;
+                const y1 = dotRect.top + dotRect.height / 2 - wrapRect.top;
+                const x2 = cardRect.left - wrapRect.left;
+                const y2 = cardRect.top + cardRect.height / 2 - wrapRect.top;
+
+                const cp1x = x1 + (x2 - x1) * 0.5;
+                const cp2x = x2 - (x2 - x1) * 0.2;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${x1} ${y1} C ${cp1x} ${y1}, ${cp2x} ${y2}, ${x2} ${y2}`);
+                path.setAttribute('stroke', '#d4748c');
+                path.setAttribute('stroke-width', '1.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-dasharray', '5 4');
+                path.setAttribute('opacity', '0.55');
+                svg.appendChild(path);
+            });
+        }
+
+        const img = document.getElementById('email-img');
+        if (img.complete) { init(); } else { img.addEventListener('load', init); }
+        window.addEventListener('resize', init);
+    </script>
+
+</body>
+</html>
