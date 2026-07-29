@@ -28,7 +28,7 @@ if (document.querySelector('.hero-title')) {
   
     setTimeout(function() {
     new Typed('#typed-text', {
-        strings: ['Writer. Reader. Oxford Comma Enthusiast.'],
+        strings: ['Writer. Researcher. Oxford Comma Enthusiast.'],
         typeSpeed: 60,
         backSpeed: 30,
         backDelay: 2000,
