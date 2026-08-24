@@ -730,123 +730,147 @@
        VIEW 4 — D3 HUMAN-CENTERED DOT GRID
     ============================================================ */
 
-    function createHumanView() {
+   function createHumanView() {
 
-      const container = d3.select("#view4");
+  const container = d3.select("#view4");
 
-      const width = 820;
-      const height = 340;
+  const width = 820;
+  const height = 390;
 
-      const dotSize = 13;
-      const gap = 6;
-      const columns = 10;
+  const dotSize = 13;
+  const gap = 6;
+  const columns = 10;
 
-      const data = [
-        {
-          group: "Female students",
-          percent: 58.7,
-          highlighted: 59,
-          color: "#4c78a8"
-        },
-        {
-          group: "Male students",
-          percent: 32.8,
-          highlighted: 33,
-          color: "#f58518"
-        }
-      ];
-
-
-      const svg = container
-        .append("svg")
-        .attr("viewBox", `0 0 ${width} ${height}`)
-        .attr("width", "100%")
-        .attr("role", "img")
-        .attr(
-          "aria-label",
-          "Comparison of persistent sadness or hopelessness among female and male students using social media more than once an hour."
-        )
-        .style("font-family", "Inter, Arial, sans-serif");
-
-
-      svg.append("text")
-        .attr("x", 82)
-        .attr("y", 28)
-        .attr("font-size", 17)
-        .attr("font-weight", 600)
-        .attr("fill", "#1f2933")
-        .text(
-          "Among students who use social media more than once an hour..."
-        );
-
-
-      data.forEach((group, groupIndex) => {
-
-        const startX =
-          groupIndex === 0 ? 100 : 470;
-
-        const startY = 130;
-
-
-        svg.append("text")
-          .attr("x", startX)
-          .attr("y", 70)
-          .attr("font-size", 16)
-          .attr("font-weight", 600)
-          .attr("fill", "#1f2933")
-          .text(group.group);
-
-
-        svg.append("text")
-          .attr("x", startX)
-          .attr("y", 101)
-          .attr("font-size", 28)
-          .attr("font-weight", 700)
-          .attr("fill", group.color)
-          .text(`${group.percent}%`);
-
-
-        svg.selectAll(`.dot-${groupIndex}`)
-          .data(d3.range(100))
-          .join("circle")
-          .attr("class", `dot-${groupIndex}`)
-          .attr(
-            "cx",
-            d =>
-              startX +
-              (d % columns) * (dotSize + gap)
-          )
-          .attr(
-            "cy",
-            d =>
-              startY +
-              Math.floor(d / columns) *
-              (dotSize + gap)
-          )
-          .attr("r", dotSize / 2)
-
-          .attr(
-            "fill",
-            d =>
-              d < group.highlighted
-                ? group.color
-                : "#d9dde2"
-          );
-      });
-
-
-      svg.append("text")
-        .attr("x", 82)
-        .attr("y", 326)
-        .attr("font-size", 12.5)
-        .attr("fill", "#5f6b76")
-        .text(
-          "Each dot represents approximately 1 out of 100 students."
-        );
+  const data = [
+    {
+      group: "Female students",
+      percent: 58.7,
+      highlighted: 59,
+      color: "#4c78a8"
+    },
+    {
+      group: "Male students",
+      percent: 32.8,
+      highlighted: 33,
+      color: "#f58518"
     }
+  ];
+
+  const svg = container
+    .append("svg")
+    .attr("viewBox", `0 0 ${width} ${height}`)
+    .attr("width", "100%")
+    .attr("role", "img")
+    .attr(
+      "aria-label",
+      "Among students who use social media more than once an hour, 58.7 percent of female students and 32.8 percent of male students reported persistent sadness or hopelessness."
+    )
+    .style("font-family", "Inter, Arial, sans-serif");
 
 
-    createHumanView();
+  /* Main context */
+
+  svg.append("text")
+    .attr("x", 82)
+    .attr("y", 28)
+    .attr("font-size", 17)
+    .attr("font-weight", 600)
+    .attr("fill", "#1f2933")
+    .text(
+      "Among students who use social media more than once an hour..."
+    );
+
+
+  data.forEach((group, groupIndex) => {
+
+    const startX =
+      groupIndex === 0 ? 100 : 470;
+
+    const startY = 165;
+
+
+    /* Group label */
+
+    svg.append("text")
+      .attr("x", startX)
+      .attr("y", 70)
+      .attr("font-size", 16)
+      .attr("font-weight", 600)
+      .attr("fill", "#1f2933")
+      .text(group.group);
+
+
+    /* Percentage */
+
+    svg.append("text")
+      .attr("x", startX)
+      .attr("y", 103)
+      .attr("font-size", 28)
+      .attr("font-weight", 700)
+      .attr("fill", group.color)
+      .text(`${group.percent}%`);
+
+
+    /* What the percentage means */
+
+    svg.append("text")
+      .attr("x", startX)
+      .attr("y", 128)
+      .attr("font-size", 13)
+      .attr("font-weight", 500)
+      .attr("fill", "#39434d")
+      .text("reported persistent sadness");
+
+    svg.append("text")
+      .attr("x", startX)
+      .attr("y", 146)
+      .attr("font-size", 13)
+      .attr("font-weight", 500)
+      .attr("fill", "#39434d")
+      .text("or hopelessness");
+
+
+    /* 100-dot grid */
+
+    svg.selectAll(`.dot-${groupIndex}`)
+      .data(d3.range(100))
+      .join("circle")
+      .attr("class", `dot-${groupIndex}`)
+      .attr(
+        "cx",
+        d =>
+          startX +
+          (d % columns) * (dotSize + gap)
+      )
+      .attr(
+        "cy",
+        d =>
+          startY +
+          Math.floor(d / columns) *
+          (dotSize + gap)
+      )
+      .attr("r", dotSize / 2)
+      .attr(
+        "fill",
+        d =>
+          d < group.highlighted
+            ? group.color
+            : "#d9dde2"
+      );
+  });
+
+
+  /* Explanation */
+
+  svg.append("text")
+    .attr("x", 82)
+    .attr("y", 372)
+    .attr("font-size", 12.5)
+    .attr("fill", "#5f6b76")
+    .text(
+      "Each grid represents 100 students. Colored dots approximate the percentage reporting persistent sadness or hopelessness."
+    );
+}
 
   </script>
 
