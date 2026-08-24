@@ -57,109 +57,61 @@ const view1Spec = {
     ]
   },
 
-  layer: [
-    {
-      mark: {
-        type: "point",
-        filled: true,
-        size: 175,
-        color: "#4f7896"
+  mark: {
+    type: "point",
+    filled: true,
+    size: 175,
+    color: "#4f7896"
+  },
+
+  encoding: {
+    x: {
+      field: "frequency",
+      type: "ordinal",
+
+      sort: {
+        field: "order",
+        order: "ascending"
       },
 
-      encoding: {
-        x: {
-          field: "frequency",
-          type: "ordinal",
+      title: "Frequency of social media use",
 
-          sort: {
-            field: "order",
-            order: "ascending"
-          },
-
-          title: "Frequency of social media use",
-
-          axis: {
-            labelAngle: -30,
-            labelPadding: 8,
-            labelLimit: 130
-          }
-        },
-
-        y: {
-          field: "percent",
-          type: "quantitative",
-
-          title: "Students reporting sadness or hopelessness (%)",
-
-          scale: {
-            domain: [20, 60]
-          },
-
-          axis: {
-            tickCount: 9
-          }
-        },
-
-        tooltip: [
-          {
-            field: "frequency",
-            type: "nominal",
-            title: "Social media use"
-          },
-          {
-            field: "percent",
-            type: "quantitative",
-            title: "Persistent sadness or hopelessness",
-            format: ".1f"
-          }
-        ]
+      axis: {
+        labelAngle: -30,
+        labelPadding: 8,
+        labelLimit: 130
       }
     },
 
-    {
-      transform: [
-        {
-          filter:
-            "datum.frequency === 'About once a day' || datum.frequency === 'More than once an hour'"
-        }
-      ],
+    y: {
+      field: "percent",
+      type: "quantitative",
 
-      mark: {
-        type: "text",
-        dy: -14,
-        fontSize: 12,
-        fontWeight: "bold",
-        color: "#25313d"
+      title: "Students reporting sadness or hopelessness (%)",
+
+      scale: {
+        domain: [20, 60]
       },
 
-      encoding: {
-        x: {
-          field: "frequency",
-          type: "ordinal",
-
-          sort: {
-            field: "order",
-            order: "ascending"
-          }
-        },
-
-        y: {
-          field: "percent",
-          type: "quantitative",
-
-          scale: {
-            domain: [20, 60]
-          }
-        },
-
-        text: {
-          field: "percent",
-          type: "quantitative",
-          format: ".1f"
-        }
+      axis: {
+        tickCount: 9
       }
-    }
-  ],
+    },
+
+    tooltip: [
+      {
+        field: "frequency",
+        type: "nominal",
+        title: "Social media use"
+      },
+      {
+        field: "percent",
+        type: "quantitative",
+        title: "Persistent sadness or hopelessness",
+        format: ".1f"
+      }
+    ]
+  },
 
   config: sharedConfig
 };
@@ -169,30 +121,30 @@ const view1Spec = {
    VIEW 2 — DUMBBELL
 ============================================================ */
 
-const sexData = [
-  { frequency: "Do not use social media", sex: "Female", percent: 46.5, order: 1 },
-  { frequency: "Do not use social media", sex: "Male", percent: 23.5, order: 1 },
+const genderData = [
+  { frequency: "Do not use social media", gender: "Female", percent: 46.5, order: 1 },
+  { frequency: "Do not use social media", gender: "Male", percent: 23.5, order: 1 },
 
-  { frequency: "A few times a month", sex: "Female", percent: 38.6, order: 2 },
-  { frequency: "A few times a month", sex: "Male", percent: 31.2, order: 2 },
+  { frequency: "A few times a month", gender: "Female", percent: 38.6, order: 2 },
+  { frequency: "A few times a month", gender: "Male", percent: 31.2, order: 2 },
 
-  { frequency: "About once a week", sex: "Female", percent: 45.2, order: 3 },
-  { frequency: "About once a week", sex: "Male", percent: 28.2, order: 3 },
+  { frequency: "About once a week", gender: "Female", percent: 45.2, order: 3 },
+  { frequency: "About once a week", gender: "Male", percent: 28.2, order: 3 },
 
-  { frequency: "A few times a week", sex: "Female", percent: 47.7, order: 4 },
-  { frequency: "A few times a week", sex: "Male", percent: 22.6, order: 4 },
+  { frequency: "A few times a week", gender: "Female", percent: 47.7, order: 4 },
+  { frequency: "A few times a week", gender: "Male", percent: 22.6, order: 4 },
 
-  { frequency: "About once a day", sex: "Female", percent: 39.9, order: 5 },
-  { frequency: "About once a day", sex: "Male", percent: 21.1, order: 5 },
+  { frequency: "About once a day", gender: "Female", percent: 39.9, order: 5 },
+  { frequency: "About once a day", gender: "Male", percent: 21.1, order: 5 },
 
-  { frequency: "Several times a day", sex: "Female", percent: 52.1, order: 6 },
-  { frequency: "Several times a day", sex: "Male", percent: 28.4, order: 6 },
+  { frequency: "Several times a day", gender: "Female", percent: 52.1, order: 6 },
+  { frequency: "Several times a day", gender: "Male", percent: 28.4, order: 6 },
 
-  { frequency: "About once an hour", sex: "Female", percent: 56.4, order: 7 },
-  { frequency: "About once an hour", sex: "Male", percent: 24.0, order: 7 },
+  { frequency: "About once an hour", gender: "Female", percent: 56.4, order: 7 },
+  { frequency: "About once an hour", gender: "Male", percent: 24.0, order: 7 },
 
-  { frequency: "More than once an hour", sex: "Female", percent: 58.7, order: 8 },
-  { frequency: "More than once an hour", sex: "Male", percent: 32.8, order: 8 }
+  { frequency: "More than once an hour", gender: "Female", percent: 58.7, order: 8 },
+  { frequency: "More than once an hour", gender: "Male", percent: 32.8, order: 8 }
 ];
 
 
@@ -203,7 +155,7 @@ const view2Spec = {
   height: 320,
 
   data: {
-    values: sexData
+    values: genderData
   },
 
   layer: [
@@ -305,9 +257,9 @@ const view2Spec = {
         },
 
         color: {
-          field: "sex",
+          field: "gender",
           type: "nominal",
-          title: "Sex",
+          title: "gender",
 
           scale: {
             domain: ["Female", "Male"],
@@ -316,9 +268,9 @@ const view2Spec = {
         },
 
         shape: {
-          field: "sex",
+          field: "gender",
           type: "nominal",
-          title: "Sex",
+          title: "gender",
 
           scale: {
             domain: ["Female", "Male"],
@@ -333,9 +285,9 @@ const view2Spec = {
             title: "Social media use"
           },
           {
-            field: "sex",
+            field: "gender",
             type: "nominal",
-            title: "Sex"
+            title: "gender"
           },
           {
             field: "percent",
@@ -489,7 +441,7 @@ function createHumanView() {
   container.selectAll("*").remove();
 
   const width = 820;
-  const height = 410;
+  const height = 430;
 
   const dotSize = 13;
   const gap = 6;
@@ -612,13 +564,24 @@ function createHumanView() {
 
   /* EXPLANATION */
 
-  svg.append("text")
+  const explanation = svg.append("text")
     .attr("x", 82)
-    .attr("y", 390)
+    .attr("y", 385)
     .attr("font-size", 12.5)
-    .attr("fill", "#5e6a76")
+    .attr("fill", "#5e6a76");
+
+  explanation.append("tspan")
+    .attr("x", 82)
+    .attr("dy", 0)
     .text(
-      "Each grid represents 100 students. Colored dots approximate the weighted percentage reporting persistent sadness or hopelessness."
+      "Each grid represents 100 students. Each colored dot represents approximately one percentage point"
+    );
+
+  explanation.append("tspan")
+    .attr("x", 82)
+    .attr("dy", 18)
+    .text(
+      "reporting persistent sadness or hopelessness."
     );
 }
 
