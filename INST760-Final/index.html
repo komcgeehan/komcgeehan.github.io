@@ -21,18 +21,18 @@
 
   <style>
     :root {
-      --bg: #f7f8fa;
+      --bg: #f6f7f9;
       --surface: #ffffff;
-      --text: #1f2933;
-      --muted: #5f6b76;
-      --border: #dfe3e8;
+      --text: #202833;
+      --muted: #5e6a76;
+      --border: #dde2e7;
 
       --overall: #4f7896;
       --female: #4c78a8;
       --male: #f58518;
       --inactive: #d9dde2;
 
-      --max-width: 1100px;
+      --max-width: 1080px;
     }
 
     * {
@@ -44,118 +44,143 @@
       background: var(--bg);
       color: var(--text);
       font-family: "Inter", Arial, sans-serif;
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .page {
       width: min(92%, var(--max-width));
       margin: 0 auto;
-      padding: 64px 0 80px;
+      padding: 52px 0 72px;
     }
 
+    /* =========================
+       HERO
+    ========================== */
+
     .hero {
-      max-width: 850px;
-      margin-bottom: 52px;
+      max-width: 930px;
+      margin-bottom: 40px;
     }
 
     .eyebrow {
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       color: var(--overall);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 0 0 18px;
-      font-size: clamp(2.25rem, 5vw, 4rem);
-      line-height: 1.08;
-      letter-spacing: -0.04em;
+      max-width: 900px;
+      margin: 0 0 16px;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
     }
 
     .intro {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0;
       color: var(--muted);
-      font-size: 1.08rem;
+      font-size: 1.03rem;
     }
+
+    /* =========================
+       VIEW CARDS
+    ========================== */
 
     .view {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px;
-      margin-bottom: 32px;
-      box-shadow: 0 8px 24px rgba(20, 30, 40, 0.04);
+      border-radius: 16px;
+      padding: 30px 32px 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 20px rgba(20, 30, 40, 0.035);
     }
 
     .view-number {
-      margin: 0 0 6px;
+      margin: 0 0 5px;
       color: var(--overall);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
     .view h2 {
-      margin: 0 0 8px;
-      font-size: 1.7rem;
+      margin: 0 0 6px;
+      font-size: 1.55rem;
       line-height: 1.25;
+      letter-spacing: -0.02em;
     }
 
     .view-description {
-      max-width: 780px;
-      margin: 0 0 28px;
+      max-width: 800px;
+      margin: 0 0 20px;
       color: var(--muted);
+      font-size: 0.98rem;
     }
 
     .chart {
       overflow-x: auto;
+      padding-top: 2px;
     }
 
     #view3 {
       width: 100%;
-      min-height: 420px;
+      min-height: 360px;
     }
 
+    /* =========================
+       LIMITATIONS
+    ========================== */
+
     .note {
-      margin-top: 36px;
-      padding: 26px 30px;
-      border-left: 4px solid var(--overall);
+      margin-top: 30px;
+      padding: 24px 26px;
       background: #eef3f6;
+      border-left: 4px solid var(--overall);
       border-radius: 4px 12px 12px 4px;
     }
 
     .note h2 {
-      margin-top: 0;
-      font-size: 1.15rem;
+      margin: 0 0 8px;
+      font-size: 1.05rem;
     }
 
     .note p {
-      margin-bottom: 0;
+      margin: 0;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .source {
-      margin-top: 34px;
+      margin-top: 22px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
+
+    /* =========================
+       MOBILE
+    ========================== */
 
     @media (max-width: 700px) {
       .page {
         width: 94%;
-        padding-top: 36px;
+        padding-top: 32px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
       }
 
       .view {
         padding: 22px 16px;
       }
 
-      h1 {
-        font-size: 2.35rem;
+      .view h2 {
+        font-size: 1.35rem;
       }
     }
   </style>
@@ -188,11 +213,9 @@
 
     <section class="view">
 
-      <p class="view-number">View 1 · Overall pattern</p>
+      <p class="view-number">View 1 · Overall Pattern</p>
 
-      <h2>
-        Sadness or Hopelessness by Social Media Use
-      </h2>
+      <h2>Sadness or Hopelessness by Social Media Use</h2>
 
       <p class="view-description">
         Reported sadness or hopelessness varies across social media use levels
@@ -210,11 +233,9 @@
 
     <section class="view">
 
-      <p class="view-number">View 2 · Comparison by sex</p>
+      <p class="view-number">View 2 · Comparison by Sex</p>
 
-      <h2>
-        The Pattern Looks Different for Female and Male Students
-      </h2>
+      <h2>The Pattern Looks Different for Female and Male Students</h2>
 
       <p class="view-description">
         Each vertical line connects female and male students reporting the
@@ -233,11 +254,9 @@
 
     <section class="view">
 
-      <p class="view-number">View 3 · Human-centered detail</p>
+      <p class="view-number">View 3 · Human-Centered Detail</p>
 
-      <h2>
-        What Does the Difference Look Like in Terms of Students?
-      </h2>
+      <h2>What Does the Difference Look Like in Terms of Students?</h2>
 
       <p class="view-description">
         This view focuses on students who reported using social media more
@@ -255,7 +274,7 @@
 
     <aside class="note">
 
-      <h2>How to read these findings</h2>
+      <h2>How to Read These Findings</h2>
 
       <p>
         These results show associations, not causation. The YRBS is a
@@ -294,14 +313,18 @@
         titleFont: "Inter",
         labelColor: "#39434d",
         titleColor: "#1f2933",
-        gridColor: "#e6e9ed",
-        domainColor: "#aeb5bc",
-        tickColor: "#aeb5bc"
+        gridColor: "#e5e9ed",
+        domainColor: "#b4bbc2",
+        tickColor: "#b4bbc2",
+        labelFontSize: 11,
+        titleFontSize: 12
       },
 
       legend: {
         labelFont: "Inter",
-        titleFont: "Inter"
+        titleFont: "Inter",
+        labelFontSize: 11,
+        titleFontSize: 11
       },
 
       view: {
@@ -311,65 +334,33 @@
 
 
     /* ============================================================
-       VIEW 1 — OVERALL DOT PLOT
+       VIEW 1
     ============================================================ */
 
     const view1Spec = {
 
       $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
-      width: 850,
-      height: 400,
+      width: 820,
+      height: 340,
 
       data: {
         values: [
-          {
-            frequency: "Do not use social media",
-            percent: 31.6,
-            order: 1
-          },
-          {
-            frequency: "A few times a month",
-            percent: 33.1,
-            order: 2
-          },
-          {
-            frequency: "About once a week",
-            percent: 37.7,
-            order: 3
-          },
-          {
-            frequency: "A few times a week",
-            percent: 35.2,
-            order: 4
-          },
-          {
-            frequency: "About once a day",
-            percent: 27.7,
-            order: 5
-          },
-          {
-            frequency: "Several times a day",
-            percent: 40.3,
-            order: 6
-          },
-          {
-            frequency: "About once an hour",
-            percent: 37.7,
-            order: 7
-          },
-          {
-            frequency: "More than once an hour",
-            percent: 46.8,
-            order: 8
-          }
+          { frequency: "Do not use social media", percent: 31.6, order: 1 },
+          { frequency: "A few times a month", percent: 33.1, order: 2 },
+          { frequency: "About once a week", percent: 37.7, order: 3 },
+          { frequency: "A few times a week", percent: 35.2, order: 4 },
+          { frequency: "About once a day", percent: 27.7, order: 5 },
+          { frequency: "Several times a day", percent: 40.3, order: 6 },
+          { frequency: "About once an hour", percent: 37.7, order: 7 },
+          { frequency: "More than once an hour", percent: 46.8, order: 8 }
         ]
       },
 
       mark: {
         type: "point",
         filled: true,
-        size: 190,
+        size: 175,
         color: "#4f7896"
       },
 
@@ -388,7 +379,7 @@
 
           axis: {
             labelAngle: -30,
-            labelPadding: 10,
+            labelPadding: 8,
             labelLimit: 130
           }
         },
@@ -428,114 +419,34 @@
 
 
     /* ============================================================
-       VIEW 2 — DUMBBELL
+       VIEW 2
     ============================================================ */
 
     const sexData = [
 
-      {
-        frequency: "Do not use social media",
-        sex: "Female",
-        percent: 46.5,
-        order: 1
-      },
-      {
-        frequency: "Do not use social media",
-        sex: "Male",
-        percent: 23.5,
-        order: 1
-      },
+      { frequency: "Do not use social media", sex: "Female", percent: 46.5, order: 1 },
+      { frequency: "Do not use social media", sex: "Male", percent: 23.5, order: 1 },
 
-      {
-        frequency: "A few times a month",
-        sex: "Female",
-        percent: 38.6,
-        order: 2
-      },
-      {
-        frequency: "A few times a month",
-        sex: "Male",
-        percent: 31.2,
-        order: 2
-      },
+      { frequency: "A few times a month", sex: "Female", percent: 38.6, order: 2 },
+      { frequency: "A few times a month", sex: "Male", percent: 31.2, order: 2 },
 
-      {
-        frequency: "About once a week",
-        sex: "Female",
-        percent: 45.2,
-        order: 3
-      },
-      {
-        frequency: "About once a week",
-        sex: "Male",
-        percent: 28.2,
-        order: 3
-      },
+      { frequency: "About once a week", sex: "Female", percent: 45.2, order: 3 },
+      { frequency: "About once a week", sex: "Male", percent: 28.2, order: 3 },
 
-      {
-        frequency: "A few times a week",
-        sex: "Female",
-        percent: 47.7,
-        order: 4
-      },
-      {
-        frequency: "A few times a week",
-        sex: "Male",
-        percent: 22.6,
-        order: 4
-      },
+      { frequency: "A few times a week", sex: "Female", percent: 47.7, order: 4 },
+      { frequency: "A few times a week", sex: "Male", percent: 22.6, order: 4 },
 
-      {
-        frequency: "About once a day",
-        sex: "Female",
-        percent: 39.9,
-        order: 5
-      },
-      {
-        frequency: "About once a day",
-        sex: "Male",
-        percent: 21.1,
-        order: 5
-      },
+      { frequency: "About once a day", sex: "Female", percent: 39.9, order: 5 },
+      { frequency: "About once a day", sex: "Male", percent: 21.1, order: 5 },
 
-      {
-        frequency: "Several times a day",
-        sex: "Female",
-        percent: 52.1,
-        order: 6
-      },
-      {
-        frequency: "Several times a day",
-        sex: "Male",
-        percent: 28.4,
-        order: 6
-      },
+      { frequency: "Several times a day", sex: "Female", percent: 52.1, order: 6 },
+      { frequency: "Several times a day", sex: "Male", percent: 28.4, order: 6 },
 
-      {
-        frequency: "About once an hour",
-        sex: "Female",
-        percent: 56.4,
-        order: 7
-      },
-      {
-        frequency: "About once an hour",
-        sex: "Male",
-        percent: 24.0,
-        order: 7
-      },
+      { frequency: "About once an hour", sex: "Female", percent: 56.4, order: 7 },
+      { frequency: "About once an hour", sex: "Male", percent: 24.0, order: 7 },
 
-      {
-        frequency: "More than once an hour",
-        sex: "Female",
-        percent: 58.7,
-        order: 8
-      },
-      {
-        frequency: "More than once an hour",
-        sex: "Male",
-        percent: 32.8,
-        order: 8
-      }
+      { frequency: "More than once an hour", sex: "Female", percent: 58.7, order: 8 },
+      { frequency: "More than once an hour", sex: "Male", percent: 32.8, order: 8 }
     ];
 
 
@@ -543,16 +454,14 @@
 
       $schema: "https://vega.github.io/schema/vega-lite/v5.json",
 
-      width: 850,
-      height: 400,
+      width: 820,
+      height: 340,
 
       data: {
         values: sexData
       },
 
       layer: [
-
-        /* Connecting dumbbell rules */
 
         {
           transform: [
@@ -579,9 +488,9 @@
 
           mark: {
             type: "rule",
-            stroke: "#9299a1",
-            strokeWidth: 1.5,
-            opacity: 0.65
+            stroke: "#9aa1a8",
+            strokeWidth: 1.25,
+            opacity: 0.55
           },
 
           encoding: {
@@ -599,7 +508,7 @@
 
               axis: {
                 labelAngle: -30,
-                labelPadding: 10,
+                labelPadding: 8,
                 labelLimit: 130
               }
             },
@@ -625,14 +534,11 @@
           }
         },
 
-
-        /* Female / Male endpoints */
-
         {
           mark: {
             type: "point",
             filled: true,
-            size: 200
+            size: 185
           },
 
           encoding: {
@@ -705,7 +611,7 @@
 
 
     /* ============================================================
-       RENDER VEGA-LITE
+       RENDER VEGA
     ============================================================ */
 
     vegaEmbed("#view1", view1Spec, {
@@ -718,17 +624,17 @@
 
 
     /* ============================================================
-       VIEW 3 — D3 HUMAN-CENTERED DOT GRID
+       VIEW 3
     ============================================================ */
 
     function createHumanView() {
 
       const container = d3.select("#view3");
 
-      const width = 850;
-      const height = 390;
+      const width = 820;
+      const height = 340;
 
-      const dotSize = 14;
+      const dotSize = 13;
       const gap = 6;
       const columns = 10;
 
@@ -760,12 +666,10 @@
         .style("font-family", "Inter, Arial, sans-serif");
 
 
-      /* Intro label */
-
       svg.append("text")
-        .attr("x", 90)
-        .attr("y", 34)
-        .attr("font-size", 18)
+        .attr("x", 82)
+        .attr("y", 28)
+        .attr("font-size", 17)
         .attr("font-weight", 600)
         .attr("fill", "#1f2933")
         .text(
@@ -776,34 +680,28 @@
       data.forEach((group, groupIndex) => {
 
         const startX =
-          groupIndex === 0 ? 110 : 500;
+          groupIndex === 0 ? 100 : 470;
 
-        const startY = 145;
+        const startY = 130;
 
-
-        /* Group */
 
         svg.append("text")
           .attr("x", startX)
-          .attr("y", 82)
-          .attr("font-size", 17)
+          .attr("y", 70)
+          .attr("font-size", 16)
           .attr("font-weight", 600)
           .attr("fill", "#1f2933")
           .text(group.group);
 
 
-        /* Percentage */
-
         svg.append("text")
           .attr("x", startX)
-          .attr("y", 116)
-          .attr("font-size", 30)
+          .attr("y", 101)
+          .attr("font-size", 28)
           .attr("font-weight", 700)
           .attr("fill", group.color)
           .text(`${group.percent}%`);
 
-
-        /* Dot grid */
 
         svg.selectAll(`.dot-${groupIndex}`)
           .data(d3.range(100))
@@ -834,15 +732,13 @@
       });
 
 
-      /* Dot explanation */
-
       svg.append("text")
-        .attr("x", 90)
-        .attr("y", 365)
-        .attr("font-size", 13)
+        .attr("x", 82)
+        .attr("y", 326)
+        .attr("font-size", 12.5)
         .attr("fill", "#5f6b76")
         .text(
-          "Each dot represents approximately one percentage point of students in each group."
+          "Each dot represents approximately 1 out of 100 students."
         );
     }
 
