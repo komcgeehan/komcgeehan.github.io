@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Social Media & Student Well-Being</title>
+
+  <!-- Shared font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vega / Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <!-- D3 -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6b76;
+      --border: #dfe3e8;
+
+      --overall: #4f7896;
+      --female: #4c78a8;
+      --male: #f58518;
+      --inactive: #d9dde2;
+
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+      padding: 64px 0 80px;
+    }
+
+    .hero {
+      max-width: 850px;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--overall);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .view {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 24px rgba(20, 30, 40, 0.04);
+    }
+
+    .view-number {
+      margin: 0 0 6px;
+      color: var(--overall);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .view h2 {
+      margin: 0 0 8px;
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .view-description {
+      max-width: 780px;
+      margin: 0 0 28px;
+      color: var(--muted);
+    }
+
+    .chart {
+      overflow-x: auto;
+    }
+
+    #view3 {
+      width: 100%;
+      min-height: 420px;
+    }
+
+    .note {
+      margin-top: 36px;
+      padding: 26px 30px;
+      border-left: 4px solid var(--overall);
+      background: #eef3f6;
+      border-radius: 4px 12px 12px 4px;
+    }
+
+    .note h2 {
+      margin-top: 0;
+      font-size: 1.15rem;
+    }
+
+    .note p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .source {
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: 94%;
+        padding-top: 36px;
+      }
+
+      .view {
+        padding: 22px 16px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <header class="hero">
+      <p class="eyebrow">2023 National Youth Risk Behavior Survey</p>
+
+      <h1>Social Media & Student Well-Being</h1>
+
+      <p class="intro">
+        How is social media use associated with persistent sadness or
+        hopelessness among U.S. high school students? These views explore
+        the overall pattern and how that relationship differs by sex.
+      </p>
+    </header>
+
+
+    <!-- =========================
+         VIEW 1
+    ========================== -->
+
+    <section class="view">
+
+      <p class="view-number">View 1 · Overall pattern</p>
+
+      <h2>
+        Sadness or Hopelessness by Social Media Use
+      </h2>
+
+      <p class="view-description">
+        Reported sadness or hopelessness varies across social media use levels
+        rather than following a simple, steady progression.
+      </p>
+
+      <div id="view1" class="chart"></div>
+
+    </section>
+
+
+    <!-- =========================
+         VIEW 2
+    ========================== -->
+
+    <section class="view">
+
+      <p class="view-number">View 2 · Comparison by sex</p>
+
+      <h2>
+        The Pattern Looks Different for Female and Male Students
+      </h2>
+
+      <p class="view-description">
+        Each vertical line connects female and male students reporting the
+        same level of social media use, making the size of the difference
+        between the two groups easier to compare.
+      </p>
+
+      <div id="view2" class="chart"></div>
+
+    </section>
+
+
+    <!-- =========================
+         VIEW 3
+    ========================== -->
+
+    <section class="view">
+
+      <p class="view-number">View 3 · Human-centered detail</p>
+
+      <h2>
+        What Does the Difference Look Like in Terms of Students?
+      </h2>
+
+      <p class="view-description">
+        This view focuses on students who reported using social media more
+        than once an hour.
+      </p>
+
+      <div id="view3"></div>
+
+    </section>
+
+
+    <!-- =========================
+         LIMITATIONS
+    ========================== -->
+
+    <aside class="note">
+
+      <h2>How to read these findings</h2>
+
+      <p>
+        These results show associations, not causation. The YRBS is a
+        cross-sectional, self-reported survey, so the visualization does not
+        suggest that social media use causes sadness or hopelessness.
+        Percentages shown here are weighted estimates from the 2023 National
+        YRBS.
+      </p>
+
+    </aside>
+
+    <p class="source">
+      Source: Centers for Disease Control and Prevention,
+      2023 National Youth Risk Behavior Survey.
+    </p>
+
+  </main>
+
+
+  <script>
+
+    /* ============================================================
+       SHARED VEGA-LITE CONFIG
+    ============================================================ */
+
+    const sharedConfig = {
+      font: "Inter",
+
+      title: {
+        font: "Inter",
+        subtitleFont: "Inter"
+      },
+
+      axis: {
+        labelFont: "Inter",
+        titleFont: "Inter",
+        labelColor: "#39434d",
+        titleColor: "#1f2933",
+        gridColor: "#e6e9ed",
+        domainColor: "#aeb5bc",
+        tickColor: "#aeb5bc"
+      },
+
+      legend: {
+        labelFont: "Inter",
+        titleFont: "Inter"
+      },
+
+      view: {
+        stroke: null
+      }
+    };
+
+
+    /* ============================================================
+       VIEW 1 — OVERALL DOT PLOT
+    ============================================================ */
+
+    const view1Spec = {
+
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+
+      width: 850,
+      height: 400,
+
+      data: {
+        values: [
+          {
+            frequency: "Do not use social media",
+            percent: 31.6,
+            order: 1
+          },
+          {
+            frequency: "A few times a month",
+            percent: 33.1,
+            order: 2
+          },
+          {
+            frequency: "About once a week",
+            percent: 37.7,
+            order: 3
+          },
+          {
+            frequency: "A few times a week",
+            percent: 35.2,
+            order: 4
+          },
+          {
+            frequency: "About once a day",
+            percent: 27.7,
+            order: 5
+          },
+          {
+            frequency: "Several times a day",
+            percent: 40.3,
+            order: 6
+          },
+          {
+            frequency: "About once an hour",
+            percent: 37.7,
+            order: 7
+          },
+          {
+            frequency: "More than once an hour",
+            percent: 46.8,
+            order: 8
+          }
+        ]
+      },
+
+      mark: {
+        type: "point",
+        filled: true,
+        size: 190,
+        color: "#4f7896"
+      },
+
+      encoding: {
+
+        x: {
+          field: "frequency",
+          type: "ordinal",
+
+          sort: {
+            field: "order",
+            order: "ascending"
+          },
+
+          title: "Frequency of social media use",
+
+          axis: {
+            labelAngle: -30,
+            labelPadding: 10,
+            labelLimit: 130
+          }
+        },
+
+        y: {
+          field: "percent",
+          type: "quantitative",
+
+          title: "Students reporting sadness or hopelessness (%)",
+
+          scale: {
+            domain: [20, 60]
+          },
+
+          axis: {
+            tickCount: 9
+          }
+        },
+
+        tooltip: [
+          {
+            field: "frequency",
+            type: "nominal",
+            title: "Social media use"
+          },
+          {
+            field: "percent",
+            type: "quantitative",
+            title: "Persistent sadness or hopelessness",
+            format: ".1f"
+          }
+        ]
+      },
+
+      config: sharedConfig
+    };
+
+
+    /* ============================================================
+       VIEW 2 — DUMBBELL
+    ============================================================ */
+
+    const sexData = [
+
+      {
+        frequency: "Do not use social media",
+        sex: "Female",
+        percent: 46.5,
+        order: 1
+      },
+      {
+        frequency: "Do not use social media",
+        sex: "Male",
+        percent: 23.5,
+        order: 1
+      },
+
+      {
+        frequency: "A few times a month",
+        sex: "Female",
+        percent: 38.6,
+        order: 2
+      },
+      {
+        frequency: "A few times a month",
+        sex: "Male",
+        percent: 31.2,
+        order: 2
+      },
+
+      {
+        frequency: "About once a week",
+        sex: "Female",
+        percent: 45.2,
+        order: 3
+      },
+      {
+        frequency: "About once a week",
+        sex: "Male",
+        percent: 28.2,
+        order: 3
+      },
+
+      {
+        frequency: "A few times a week",
+        sex: "Female",
+        percent: 47.7,
+        order: 4
+      },
+      {
+        frequency: "A few times a week",
+        sex: "Male",
+        percent: 22.6,
+        order: 4
+      },
+
+      {
+        frequency: "About once a day",
+        sex: "Female",
+        percent: 39.9,
+        order: 5
+      },
+      {
+        frequency: "About once a day",
+        sex: "Male",
+        percent: 21.1,
+        order: 5
+      },
+
+      {
+        frequency: "Several times a day",
+        sex: "Female",
+        percent: 52.1,
+        order: 6
+      },
+      {
+        frequency: "Several times a day",
+        sex: "Male",
+        percent: 28.4,
+        order: 6
+      },
+
+      {
+        frequency: "About once an hour",
+        sex: "Female",
+        percent: 56.4,
+        order: 7
+      },
+      {
+        frequency: "About once an hour",
+        sex: "Male",
+        percent: 24.0,
+        order: 7
+      },
+
+      {
+        frequency: "More than once an hour",
+        sex: "Female",
+        percent: 58.7,
+        order: 8
+      },
+      {
+        frequency: "More than once an hour",
+        sex: "Male",
+        percent: 32.8,
+        order: 8
+      }
+    ];
+
+
+    const view2Spec = {
+
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+
+      width: 850,
+      height: 400,
+
+      data: {
+        values: sexData
+      },
+
+      layer: [
+
+        /* Connecting dumbbell rules */
+
+        {
+          transform: [
+            {
+              aggregate: [
+                {
+                  op: "min",
+                  field: "percent",
+                  as: "min_percent"
+                },
+                {
+                  op: "max",
+                  field: "percent",
+                  as: "max_percent"
+                }
+              ],
+
+              groupby: [
+                "frequency",
+                "order"
+              ]
+            }
+          ],
+
+          mark: {
+            type: "rule",
+            stroke: "#9299a1",
+            strokeWidth: 1.5,
+            opacity: 0.65
+          },
+
+          encoding: {
+
+            x: {
+              field: "frequency",
+              type: "ordinal",
+
+              sort: {
+                field: "order",
+                order: "ascending"
+              },
+
+              title: "Frequency of social media use",
+
+              axis: {
+                labelAngle: -30,
+                labelPadding: 10,
+                labelLimit: 130
+              }
+            },
+
+            y: {
+              field: "min_percent",
+              type: "quantitative",
+
+              title: "Students reporting sadness or hopelessness (%)",
+
+              scale: {
+                domain: [20, 60]
+              },
+
+              axis: {
+                tickCount: 9
+              }
+            },
+
+            y2: {
+              field: "max_percent"
+            }
+          }
+        },
+
+
+        /* Female / Male endpoints */
+
+        {
+          mark: {
+            type: "point",
+            filled: true,
+            size: 200
+          },
+
+          encoding: {
+
+            x: {
+              field: "frequency",
+              type: "ordinal",
+
+              sort: {
+                field: "order",
+                order: "ascending"
+              }
+            },
+
+            y: {
+              field: "percent",
+              type: "quantitative",
+
+              scale: {
+                domain: [20, 60]
+              }
+            },
+
+            color: {
+              field: "sex",
+              type: "nominal",
+              title: "Sex",
+
+              scale: {
+                domain: ["Female", "Male"],
+                range: ["#4c78a8", "#f58518"]
+              }
+            },
+
+            shape: {
+              field: "sex",
+              type: "nominal",
+              title: "Sex",
+
+              scale: {
+                domain: ["Female", "Male"],
+                range: ["circle", "square"]
+              }
+            },
+
+            tooltip: [
+              {
+                field: "frequency",
+                type: "nominal",
+                title: "Social media use"
+              },
+              {
+                field: "sex",
+                type: "nominal",
+                title: "Sex"
+              },
+              {
+                field: "percent",
+                type: "quantitative",
+                title: "Persistent sadness or hopelessness",
+                format: ".1f"
+              }
+            ]
+          }
+        }
+      ],
+
+      config: sharedConfig
+    };
+
+
+    /* ============================================================
+       RENDER VEGA-LITE
+    ============================================================ */
+
+    vegaEmbed("#view1", view1Spec, {
+      actions: false
+    });
+
+    vegaEmbed("#view2", view2Spec, {
+      actions: false
+    });
+
+
+    /* ============================================================
+       VIEW 3 — D3 HUMAN-CENTERED DOT GRID
+    ============================================================ */
+
+    function createHumanView() {
+
+      const container = d3.select("#view3");
+
+      const width = 850;
+      const height = 390;
+
+      const dotSize = 14;
+      const gap = 6;
+      const columns = 10;
+
+      const data = [
+        {
+          group: "Female students",
+          percent: 58.7,
+          highlighted: 59,
+          color: "#4c78a8"
+        },
+        {
+          group: "Male students",
+          percent: 32.8,
+          highlighted: 33,
+          color: "#f58518"
+        }
+      ];
+
+
+      const svg = container
+        .append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("width", "100%")
+        .attr("role", "img")
+        .attr(
+          "aria-label",
+          "Comparison of persistent sadness or hopelessness among female and male students using social media more than once an hour."
+        )
+        .style("font-family", "Inter, Arial, sans-serif");
+
+
+      /* Intro label */
+
+      svg.append("text")
+        .attr("x", 90)
+        .attr("y", 34)
+        .attr("font-size", 18)
+        .attr("font-weight", 600)
+        .attr("fill", "#1f2933")
+        .text(
+          "Among students who use social media more than once an hour..."
+        );
+
+
+      data.forEach((group, groupIndex) => {
+
+        const startX =
+          groupIndex === 0 ? 110 : 500;
+
+        const startY = 145;
+
+
+        /* Group */
+
+        svg.append("text")
+          .attr("x", startX)
+          .attr("y", 82)
+          .attr("font-size", 17)
+          .attr("font-weight", 600)
+          .attr("fill", "#1f2933")
+          .text(group.group);
+
+
+        /* Percentage */
+
+        svg.append("text")
+          .attr("x", startX)
+          .attr("y", 116)
+          .attr("font-size", 30)
+          .attr("font-weight", 700)
+          .attr("fill", group.color)
+          .text(`${group.percent}%`);
+
+
+        /* Dot grid */
+
+        svg.selectAll(`.dot-${groupIndex}`)
+          .data(d3.range(100))
+          .join("circle")
+          .attr("class", `dot-${groupIndex}`)
+          .attr(
+            "cx",
+            d =>
+              startX +
+              (d % columns) * (dotSize + gap)
+          )
+          .attr(
+            "cy",
+            d =>
+              startY +
+              Math.floor(d / columns) *
+              (dotSize + gap)
+          )
+          .attr("r", dotSize / 2)
+
+          .attr(
+            "fill",
+            d =>
+              d < group.highlighted
+                ? group.color
+                : "#d9dde2"
+          );
+      });
+
+
+      /* Dot explanation */
+
+      svg.append("text")
+        .attr("x", 90)
+        .attr("y", 365)
+        .attr("font-size", 13)
+        .attr("fill", "#5f6b76")
+        .text(
+          "Each dot represents approximately 1 out of 100 students."
+        );
+    }
+
+
+    createHumanView();
+
+  </script>
+
+</body>
+</html>
