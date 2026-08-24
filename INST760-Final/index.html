@@ -6,17 +6,14 @@
 
   <title>Social Media & Student Well-Being</title>
 
-  <!-- Shared font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Vega / Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- D3 -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
   <style>
@@ -53,10 +50,6 @@
       padding: 52px 0 72px;
     }
 
-    /* =========================
-       HERO
-    ========================== */
-
     .hero {
       max-width: 930px;
       margin-bottom: 40px;
@@ -85,10 +78,6 @@
       color: var(--muted);
       font-size: 1.03rem;
     }
-
-    /* =========================
-       VIEW CARDS
-    ========================== */
 
     .view {
       background: var(--surface);
@@ -127,14 +116,10 @@
       padding-top: 2px;
     }
 
-    #view3 {
+    #view4 {
       width: 100%;
-      min-height: 360px;
+      min-height: 340px;
     }
-
-    /* =========================
-       LIMITATIONS
-    ========================== */
 
     .note {
       margin-top: 30px;
@@ -161,10 +146,6 @@
       font-size: 0.8rem;
     }
 
-    /* =========================
-       MOBILE
-    ========================== */
-
     @media (max-width: 700px) {
       .page {
         width: 94%;
@@ -190,10 +171,6 @@
 
   <main class="page">
 
-    <!-- =========================
-         INTRO
-    ========================== -->
-
     <header class="hero">
       <p class="eyebrow">2023 National Youth Risk Behavior Survey</p>
 
@@ -207,9 +184,7 @@
     </header>
 
 
-    <!-- =========================
-         VIEW 1
-    ========================== -->
+    <!-- VIEW 1 -->
 
     <section class="view">
 
@@ -227,9 +202,7 @@
     </section>
 
 
-    <!-- =========================
-         VIEW 2
-    ========================== -->
+    <!-- VIEW 2 -->
 
     <section class="view">
 
@@ -248,13 +221,29 @@
     </section>
 
 
-    <!-- =========================
-         VIEW 3
-    ========================== -->
+    <!-- VIEW 3 -->
 
     <section class="view">
 
-      <p class="view-number">View 3 · Human-Centered Detail</p>
+      <p class="view-number">View 3 · Size of the Gap</p>
+
+      <h2>Where Is the Gap Between Female and Male Students Largest?</h2>
+
+      <p class="view-description">
+        Ranking the female–male difference makes it easier to see which social
+        media use levels have the widest gaps in reported sadness or hopelessness.
+      </p>
+
+      <div id="view3" class="chart"></div>
+
+    </section>
+
+
+    <!-- VIEW 4 -->
+
+    <section class="view">
+
+      <p class="view-number">View 4 · Human-Centered Detail</p>
 
       <h2>What Does the Difference Look Like in Terms of Students?</h2>
 
@@ -263,14 +252,10 @@
         than once an hour.
       </p>
 
-      <div id="view3"></div>
+      <div id="view4"></div>
 
     </section>
 
-
-    <!-- =========================
-         LIMITATIONS
-    ========================== -->
 
     <aside class="note">
 
@@ -611,6 +596,120 @@
 
 
     /* ============================================================
+       VIEW 3 — GAP RANKING
+    ============================================================ */
+
+    const view3Spec = {
+
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+
+      width: 720,
+      height: 340,
+
+      data: {
+        values: [
+          { frequency: "Do not use social media", gap: 23.0 },
+          { frequency: "A few times a month", gap: 7.4 },
+          { frequency: "About once a week", gap: 17.0 },
+          { frequency: "A few times a week", gap: 25.1 },
+          { frequency: "About once a day", gap: 18.8 },
+          { frequency: "Several times a day", gap: 23.7 },
+          { frequency: "About once an hour", gap: 32.4 },
+          { frequency: "More than once an hour", gap: 25.9 }
+        ]
+      },
+
+      layer: [
+
+        {
+          mark: {
+            type: "bar",
+            cornerRadiusEnd: 4,
+            color: "#4f7896"
+          },
+
+          encoding: {
+
+            y: {
+              field: "frequency",
+              type: "nominal",
+              sort: "-x",
+              title: null,
+
+              axis: {
+                labelFontSize: 12,
+                labelLimit: 190
+              }
+            },
+
+            x: {
+              field: "gap",
+              type: "quantitative",
+              title: "Female–male gap (percentage points)",
+
+              scale: {
+                domain: [0, 38]
+              }
+            },
+
+            tooltip: [
+              {
+                field: "frequency",
+                type: "nominal",
+                title: "Social media use"
+              },
+              {
+                field: "gap",
+                type: "quantitative",
+                title: "Female–male gap",
+                format: ".1f"
+              }
+            ]
+          }
+        },
+
+        {
+          mark: {
+            type: "text",
+            align: "left",
+            baseline: "middle",
+            dx: 7,
+            fontSize: 12,
+            fontWeight: "bold",
+            color: "#25313d"
+          },
+
+          encoding: {
+
+            y: {
+              field: "frequency",
+              type: "nominal",
+              sort: "-x"
+            },
+
+            x: {
+              field: "gap",
+              type: "quantitative",
+
+              scale: {
+                domain: [0, 38]
+              }
+            },
+
+            text: {
+              field: "gap",
+              type: "quantitative",
+              format: ".1f"
+            }
+          }
+        }
+      ],
+
+      config: sharedConfig
+    };
+
+
+    /* ============================================================
        RENDER VEGA
     ============================================================ */
 
@@ -622,14 +721,18 @@
       actions: false
     });
 
+    vegaEmbed("#view3", view3Spec, {
+      actions: false
+    });
+
 
     /* ============================================================
-       VIEW 3
+       VIEW 4 — D3 HUMAN-CENTERED DOT GRID
     ============================================================ */
 
     function createHumanView() {
 
-      const container = d3.select("#view3");
+      const container = d3.select("#view4");
 
       const width = 820;
       const height = 340;
