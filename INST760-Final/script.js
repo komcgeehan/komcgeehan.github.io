@@ -104,6 +104,7 @@ const view1Spec = {
         type: "nominal",
         title: "Social media use"
       },
+
       {
         field: "percent",
         type: "quantitative",
@@ -118,33 +119,113 @@ const view1Spec = {
 
 
 /* ============================================================
-   VIEW 2 — DUMBBELL
+   VIEW 2 — GENDER COMPARISON / DUMBBELL
 ============================================================ */
 
 const genderData = [
-  { frequency: "Do not use social media", gender: "Female", percent: 46.5, order: 1 },
-  { frequency: "Do not use social media", gender: "Male", percent: 23.5, order: 1 },
+  {
+    frequency: "Do not use social media",
+    gender: "Female",
+    percent: 46.5,
+    order: 1
+  },
+  {
+    frequency: "Do not use social media",
+    gender: "Male",
+    percent: 23.5,
+    order: 1
+  },
 
-  { frequency: "A few times a month", gender: "Female", percent: 38.6, order: 2 },
-  { frequency: "A few times a month", gender: "Male", percent: 31.2, order: 2 },
+  {
+    frequency: "A few times a month",
+    gender: "Female",
+    percent: 38.6,
+    order: 2
+  },
+  {
+    frequency: "A few times a month",
+    gender: "Male",
+    percent: 31.2,
+    order: 2
+  },
 
-  { frequency: "About once a week", gender: "Female", percent: 45.2, order: 3 },
-  { frequency: "About once a week", gender: "Male", percent: 28.2, order: 3 },
+  {
+    frequency: "About once a week",
+    gender: "Female",
+    percent: 45.2,
+    order: 3
+  },
+  {
+    frequency: "About once a week",
+    gender: "Male",
+    percent: 28.2,
+    order: 3
+  },
 
-  { frequency: "A few times a week", gender: "Female", percent: 47.7, order: 4 },
-  { frequency: "A few times a week", gender: "Male", percent: 22.6, order: 4 },
+  {
+    frequency: "A few times a week",
+    gender: "Female",
+    percent: 47.7,
+    order: 4
+  },
+  {
+    frequency: "A few times a week",
+    gender: "Male",
+    percent: 22.6,
+    order: 4
+  },
 
-  { frequency: "About once a day", gender: "Female", percent: 39.9, order: 5 },
-  { frequency: "About once a day", gender: "Male", percent: 21.1, order: 5 },
+  {
+    frequency: "About once a day",
+    gender: "Female",
+    percent: 39.9,
+    order: 5
+  },
+  {
+    frequency: "About once a day",
+    gender: "Male",
+    percent: 21.1,
+    order: 5
+  },
 
-  { frequency: "Several times a day", gender: "Female", percent: 52.1, order: 6 },
-  { frequency: "Several times a day", gender: "Male", percent: 28.4, order: 6 },
+  {
+    frequency: "Several times a day",
+    gender: "Female",
+    percent: 52.1,
+    order: 6
+  },
+  {
+    frequency: "Several times a day",
+    gender: "Male",
+    percent: 28.4,
+    order: 6
+  },
 
-  { frequency: "About once an hour", gender: "Female", percent: 56.4, order: 7 },
-  { frequency: "About once an hour", gender: "Male", percent: 24.0, order: 7 },
+  {
+    frequency: "About once an hour",
+    gender: "Female",
+    percent: 56.4,
+    order: 7
+  },
+  {
+    frequency: "About once an hour",
+    gender: "Male",
+    percent: 24.0,
+    order: 7
+  },
 
-  { frequency: "More than once an hour", gender: "Female", percent: 58.7, order: 8 },
-  { frequency: "More than once an hour", gender: "Male", percent: 32.8, order: 8 }
+  {
+    frequency: "More than once an hour",
+    gender: "Female",
+    percent: 58.7,
+    order: 8
+  },
+  {
+    frequency: "More than once an hour",
+    gender: "Male",
+    percent: 32.8,
+    order: 8
+  }
 ];
 
 
@@ -159,6 +240,9 @@ const view2Spec = {
   },
 
   layer: [
+
+    /* CONNECTING LINES */
+
     {
       transform: [
         {
@@ -168,6 +252,7 @@ const view2Spec = {
               field: "percent",
               as: "min_percent"
             },
+
             {
               op: "max",
               field: "percent",
@@ -229,6 +314,9 @@ const view2Spec = {
       }
     },
 
+
+    /* FEMALE / MALE ENDPOINTS */
+
     {
       mark: {
         type: "point",
@@ -259,7 +347,7 @@ const view2Spec = {
         color: {
           field: "gender",
           type: "nominal",
-          title: "gender",
+          title: "Gender",
 
           scale: {
             domain: ["Female", "Male"],
@@ -270,7 +358,7 @@ const view2Spec = {
         shape: {
           field: "gender",
           type: "nominal",
-          title: "gender",
+          title: "Gender",
 
           scale: {
             domain: ["Female", "Male"],
@@ -284,11 +372,13 @@ const view2Spec = {
             type: "nominal",
             title: "Social media use"
           },
+
           {
             field: "gender",
             type: "nominal",
-            title: "gender"
+            title: "Gender"
           },
+
           {
             field: "percent",
             type: "quantitative",
@@ -305,7 +395,7 @@ const view2Spec = {
 
 
 /* ============================================================
-   VIEW 3 — RANKED GAP
+   VIEW 3 — RANKED FEMALE–MALE GAP
 ============================================================ */
 
 const view3Spec = {
@@ -328,6 +418,9 @@ const view3Spec = {
   },
 
   layer: [
+
+    /* BARS */
+
     {
       mark: {
         type: "bar",
@@ -351,6 +444,7 @@ const view3Spec = {
         x: {
           field: "gap",
           type: "quantitative",
+
           title: "Female–male gap (percentage points)",
 
           scale: {
@@ -364,6 +458,7 @@ const view3Spec = {
             type: "nominal",
             title: "Social media use"
           },
+
           {
             field: "gap",
             type: "quantitative",
@@ -373,6 +468,9 @@ const view3Spec = {
         ]
       }
     },
+
+
+    /* BAR VALUE LABELS */
 
     {
       mark: {
@@ -454,6 +552,7 @@ function createHumanView() {
       highlighted: 59,
       color: "#4c78a8"
     },
+
     {
       group: "Male students",
       percent: 32.8,
@@ -461,6 +560,7 @@ function createHumanView() {
       color: "#f58518"
     }
   ];
+
 
   const svg = container
     .append("svg")
@@ -471,7 +571,10 @@ function createHumanView() {
       "aria-label",
       "Among students who use social media more than once an hour, 58.7 percent of female students and 32.8 percent of male students reported persistent sadness or hopelessness."
     )
-    .style("font-family", "Inter, Arial, sans-serif");
+    .style(
+      "font-family",
+      "Inter, Arial, sans-serif"
+    );
 
 
   /* MAIN CONTEXT */
@@ -488,7 +591,10 @@ function createHumanView() {
 
 
   data.forEach((group, groupIndex) => {
-    const startX = groupIndex === 0 ? 100 : 470;
+
+    const startX =
+      groupIndex === 0 ? 100 : 470;
+
     const startY = 175;
 
 
@@ -522,7 +628,9 @@ function createHumanView() {
       .attr("font-size", 13)
       .attr("font-weight", 500)
       .attr("fill", "#39434d")
-      .text("reported persistent sadness");
+      .text(
+        "reported persistent sadness"
+      );
 
     svg.append("text")
       .attr("x", startX)
@@ -530,7 +638,9 @@ function createHumanView() {
       .attr("font-size", 13)
       .attr("font-weight", 500)
       .attr("fill", "#39434d")
-      .text("or hopelessness");
+      .text(
+        "or hopelessness"
+      );
 
 
     /* DOT GRID */
@@ -538,20 +648,28 @@ function createHumanView() {
     svg.selectAll(`.dot-${groupIndex}`)
       .data(d3.range(100))
       .join("circle")
-      .attr("class", `dot-${groupIndex}`)
+      .attr(
+        "class",
+        `dot-${groupIndex}`
+      )
       .attr(
         "cx",
         d =>
           startX +
-          (d % columns) * (dotSize + gap)
+          (d % columns) *
+          (dotSize + gap)
       )
       .attr(
         "cy",
         d =>
           startY +
-          Math.floor(d / columns) * (dotSize + gap)
+          Math.floor(d / columns) *
+          (dotSize + gap)
       )
-      .attr("r", dotSize / 2)
+      .attr(
+        "r",
+        dotSize / 2
+      )
       .attr(
         "fill",
         d =>
